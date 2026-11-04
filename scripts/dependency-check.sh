@@ -12,6 +12,8 @@ SCRATCH=".sca-deps"
 
 rm -rf "$SCRATCH" "$REPORT_DIR/dependency-check"
 mkdir -p "$SCRATCH" "$REPORT_DIR/dependency-check" "$DC_DATA"
+# The scanner image runs as a non-root user; the data dir must be writable by it.
+chmod -R a+rwX "$DC_DATA"
 
 log "Resolving pinned dependencies from app/requirements.txt"
 docker run --rm -v "$PWD:/src" "$PY_IMAGE" \
