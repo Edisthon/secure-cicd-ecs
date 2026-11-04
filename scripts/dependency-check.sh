@@ -13,7 +13,7 @@ SCRATCH=".sca-deps"
 rm -rf "$SCRATCH" "$REPORT_DIR/dependency-check"
 mkdir -p "$SCRATCH" "$REPORT_DIR/dependency-check" "$DC_DATA"
 # The scanner image runs as a non-root user; the data dir must be writable by it.
-chmod -R a+rwX "$DC_DATA"
+chmod -R a+rwX "$DC_DATA" "$REPORT_DIR/dependency-check"
 
 log "Resolving pinned dependencies from app/requirements.txt"
 docker run --rm -v "$PWD:/src" "$PY_IMAGE" \
@@ -41,8 +41,11 @@ rc=$?
 set -e
 rm -rf "$SCRATCH"
 
-if [ "$rc" -ne 0 ]; then
-  log "SCA GATE FAILED (exit $rc): dependency with CVSS >= $FAIL_CVSS - see $REPORT_DIR/dependency-check/"
+if [ "$rc" -eq 1 ]; then
+  log "SCA GATE FAILED: dependency with CVSS >= $FAIL_CVSS - see $REPORT_DIR/dependency-check/"
+  exit 1
+elif [ "$rc" -ne 0 ]; then
+  log "SCA TOOL ERROR (exit $rc): the scan itself failed (not a CVSS finding) - see the log above"
   exit 1
 fi
 log "SCA gate passed"

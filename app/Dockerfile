@@ -21,6 +21,9 @@ RUN pip install -r requirements-dev.txt && pytest -q test_app.py
 FROM base AS production
 ARG APP_VERSION=dev
 ENV APP_VERSION=${APP_VERSION} PORT=8080
+# Build tooling is not needed at runtime: removing it drops pip/setuptools (and the libraries
+# they bundle) from the image, which is what Trivy flagged.
+RUN pip uninstall -y pip setuptools wheel 2>/dev/null || true
 RUN useradd --system --uid 10001 --no-create-home appuser
 USER 10001
 EXPOSE 8080

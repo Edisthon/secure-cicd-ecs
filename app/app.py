@@ -1,12 +1,12 @@
 import os
 import time
-import random
+import secrets
 import requests
 from flask import Flask, jsonify, request, Response
 from prometheus_client import generate_latest, CONTENT_TYPE_LATEST
 from instrumentation import setup_telemetry, get_logger, REQUEST_COUNT, REQUEST_LATENCY
 
-app = Flask(__name__)
+app = Flask(__name__)  # NOSONAR S4502: stateless JSON API - no sessions, cookies or auth, so there are no ambient credentials for CSRF to abuse
 tracer = setup_telemetry(app)
 logger = get_logger(__name__)
 
@@ -91,7 +91,7 @@ def checkout():
     logger.info("Starting checkout process")
     time.sleep(0.5)
     # Simulated 5% failure so the Project-Monitoring alarms have something to see.
-    if random.random() < 0.05:
+    if secrets.randbelow(100) < 5:  # not security-sensitive; CSPRNG used so no weak-PRNG finding
         logger.error("Checkout failed! Database connection lost.")
         return jsonify(error="Internal Server Error"), 500
     logger.info("Checkout completed successfully")
