@@ -1,0 +1,6 @@
+image:
+  tag: "5-18c695c"
+  uri: "904570587823.dkr.ecr.eu-west-1.amazonaws.com/secure-cicd-app:5-18c695c@sha256:725a2a8eb5a407f68264e396174c5745f7be7b7e9c18cd8749c88e2da30e5a1a"
+build:
+  commit: "18c695c64c2c5fd2f87f92d45f83b3f519f21949"
+  url: "http://54.72.200.220:8080/job/secure-cicd-ecs/job/main/5/"
