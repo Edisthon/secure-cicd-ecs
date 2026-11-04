@@ -1,0 +1,166 @@
+---
+# Runs on the Jenkins host, so SonarQube is reached on localhost:9000 - no tunnel, no exposed port.
+- name: Start SonarQube and its database
+  ansible.builtin.command: docker-compose up -d sonar-db sonarqube
+  args: { chdir: "{{ app_dir }}" }
+  register: sonar_up
+  changed_when: "'Creating' in sonar_up.stderr or 'Recreating' in sonar_up.stderr or 'Started' in sonar_up.stderr"
+
+- name: Wait for SonarQube to be UP
+  ansible.builtin.uri:
+    url: "{{ sonar_url }}/api/system/status"
+    return_content: true
+  register: sq_status
+  until: sq_status.status == 200 and (sq_status.json.status | default('')) == 'UP'
+  retries: 60
+  delay: 10
+
+- name: Is the admin password already changed?
+  ansible.builtin.uri:
+    url: "{{ sonar_url }}/api/authentication/validate"
+    url_username: admin
+    url_password: "{{ sonar_admin_password }}"
+    force_basic_auth: true
+    return_content: true
+    status_code: [200, 401]
+  register: sq_auth
+  no_log: true
+
+- name: Change the default admin password
+  ansible.builtin.uri:
+    url: "{{ sonar_url }}/api/users/change_password"
+    method: POST
+    url_username: admin
+    url_password: admin
+    force_basic_auth: true
+    body_format: form-urlencoded
+    body: { login: admin, previousPassword: admin, password: "{{ sonar_admin_password }}" }
+    status_code: 204
+  when: not (sq_auth.json.valid | default(false))
+  no_log: true
+
+# ---- analysis token for Jenkins (reused while it is still valid) ----
+- name: Existing token file?
+  ansible.builtin.stat:
+    path: "{{ app_dir }}/secrets/SONAR_TOKEN"
+  register: token_file
+
+- name: Read existing token
+  ansible.builtin.slurp:
+    src: "{{ app_dir }}/secrets/SONAR_TOKEN"
+  register: token_old
+  when: token_file.stat.exists
+  no_log: true
+
+- name: Is the existing token still valid?
+  ansible.builtin.uri:
+    url: "{{ sonar_url }}/api/authentication/validate"
+    url_username: "{{ token_old.content | b64decode | trim }}"
+    url_password: ""
+    force_basic_auth: true
+    return_content: true
+    status_code: [200, 401]
+  register: token_check
+  when: token_file.stat.exists
+  no_log: true
+
+- name: Rotate and store the Jenkins token
+  when: not token_file.stat.exists or not (token_check.json.valid | default(false))
+  block:
+    - name: Revoke any old token with this name
+      ansible.builtin.uri:
+        url: "{{ sonar_url }}/api/user_tokens/revoke"
+        method: POST
+        url_username: admin
+        url_password: "{{ sonar_admin_password }}"
+        force_basic_auth: true
+        body_format: form-urlencoded
+        body: { name: "{{ sonar_token_name }}" }
+        status_code: [200, 204, 404]
+      no_log: true
+
+    - name: Generate the token
+      ansible.builtin.uri:
+        url: "{{ sonar_url }}/api/user_tokens/generate"
+        method: POST
+        url_username: admin
+        url_password: "{{ sonar_admin_password }}"
+        force_basic_auth: true
+        body_format: form-urlencoded
+        body: { name: "{{ sonar_token_name }}" }
+        return_content: true
+      register: sq_token
+      no_log: true
+
+    - name: Store it where Jenkins (JCasC) reads secrets
+      ansible.builtin.copy:
+        dest: "{{ app_dir }}/secrets/SONAR_TOKEN"
+        content: "{{ sq_token.json.token }}"
+        mode: "0400"
+      no_log: true
+      notify: restart jenkins
+
+# ---- quality gate + project ----
+- name: Does the quality gate exist?
+  ansible.builtin.uri:
+    url: "{{ sonar_url }}/api/qualitygates/show?name={{ sonar_gate_name }}"
+    url_username: admin
+    url_password: "{{ sonar_admin_password }}"
+    force_basic_auth: true
+    status_code: [200, 404]
+  register: sq_gate
+  no_log: true
+
+- name: Create the quality gate and its conditions
+  when: sq_gate.status == 404
+  block:
+    - name: Create gate
+      ansible.builtin.uri:
+        url: "{{ sonar_url }}/api/qualitygates/create"
+        method: POST
+        url_username: admin
+        url_password: "{{ sonar_admin_password }}"
+        force_basic_auth: true
+        body_format: form-urlencoded
+        body: { name: "{{ sonar_gate_name }}" }
+      no_log: true
+
+    - name: Add conditions
+      ansible.builtin.uri:
+        url: "{{ sonar_url }}/api/qualitygates/create_condition"
+        method: POST
+        url_username: admin
+        url_password: "{{ sonar_admin_password }}"
+        force_basic_auth: true
+        body_format: form-urlencoded
+        body:
+          gateName: "{{ sonar_gate_name }}"
+          metric: "{{ item.metric }}"
+          op: "{{ item.op }}"
+          error: "{{ item.error }}"
+      loop: "{{ sonar_gate_conditions }}"
+      no_log: true
+
+- name: Create the project (400 = already exists)
+  ansible.builtin.uri:
+    url: "{{ sonar_url }}/api/projects/create"
+    method: POST
+    url_username: admin
+    url_password: "{{ sonar_admin_password }}"
+    force_basic_auth: true
+    body_format: form-urlencoded
+    body: { name: "{{ sonar_project_key }}", project: "{{ sonar_project_key }}" }
+    status_code: [200, 400]
+  no_log: true
+
+- name: Assign the quality gate to the project
+  ansible.builtin.uri:
+    url: "{{ sonar_url }}/api/qualitygates/select"
+    method: POST
+    url_username: admin
+    url_password: "{{ sonar_admin_password }}"
+    force_basic_auth: true
+    body_format: form-urlencoded
+    body: { gateName: "{{ sonar_gate_name }}", projectKey: "{{ sonar_project_key }}" }
+    status_code: 204
+  no_log: true

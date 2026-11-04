@@ -1,0 +1,60 @@
+{
+  "family": "${ECS_TASK_FAMILY}",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "${TASK_CPU}",
+  "memory": "${TASK_MEMORY}",
+  "executionRoleArn": "${EXECUTION_ROLE_ARN}",
+  "taskRoleArn": "${TASK_ROLE_ARN}",
+  "runtimePlatform": {
+    "cpuArchitecture": "X86_64",
+    "operatingSystemFamily": "LINUX"
+  },
+  "containerDefinitions": [
+    {
+      "name": "${ECS_CONTAINER_NAME}",
+      "image": "${IMAGE_URI}",
+      "essential": true,
+      "portMappings": [
+        { "containerPort": 8080, "protocol": "tcp" }
+      ],
+      "readonlyRootFilesystem": true,
+      "user": "10001",
+      "linuxParameters": {
+        "initProcessEnabled": true,
+        "capabilities": { "drop": ["ALL"] }
+      },
+      "environment": [
+        { "name": "APP_VERSION", "value": "${IMAGE_TAG}" },
+        { "name": "PORT", "value": "8080" }
+      ],
+      "healthCheck": {
+        "command": ["CMD-SHELL", "python -c \"import urllib.request;urllib.request.urlopen('http://127.0.0.1:8080/health',timeout=2)\" || exit 1"],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 20
+      },
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "${LOG_GROUP}",
+          "awslogs-region": "${AWS_REGION}",
+          "awslogs-stream-prefix": "app"
+        }
+      },
+      "mountPoints": [
+        { "sourceVolume": "tmp", "containerPath": "/tmp", "readOnly": false }
+      ],
+      "stopTimeout": 30
+    }
+  ],
+  "volumes": [
+    { "name": "tmp" }
+  ],
+  "tags": [
+    { "key": "app", "value": "${ECS_TASK_FAMILY}" },
+    { "key": "build", "value": "${IMAGE_TAG}" },
+    { "key": "managed-by", "value": "jenkins" }
+  ]
+}

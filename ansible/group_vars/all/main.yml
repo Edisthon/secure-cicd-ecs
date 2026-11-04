@@ -1,0 +1,30 @@
+---
+# ---- non-secret settings (edit these) ----
+aws_region: eu-west-1
+github_owner: "Edisthon"          # GitHub user/org that owns the repo
+github_repo: "secure-cicd-ecs"
+app_dir: /opt/secure-cicd
+jenkins_job_name: secure-cicd-ecs
+jenkins_public_host: "{{ ansible_host | default(inventory_hostname) }}"
+manage_github_webhook: false        # Jenkins :8080 is IP-restricted so GitHub cannot reach it; the job polls every 5 min. Set true only if exposed (needs PAT with admin:repo_hook)
+
+sonar_url: "http://localhost:9000"  # tasks run ON the Jenkins host, so no tunnel is needed
+sonar_project_key: secure-cicd-ecs
+sonar_gate_name: Secure-Gate
+sonar_token_name: jenkins
+# The gate is RED when any of these conditions is hit (metric, operator, error threshold)
+sonar_gate_conditions:
+  - { metric: vulnerabilities,             op: GT, error: "0" }
+  - { metric: blocker_violations,          op: GT, error: "0" }
+  - { metric: critical_violations,         op: GT, error: "0" }
+  - { metric: security_rating,             op: GT, error: "1" }
+  - { metric: security_hotspots_reviewed,  op: LT, error: "100" }
+
+# ---- secrets come from the vault file (group_vars/all/vault.yml, see vault.yml.example) ----
+sonar_admin_password: "{{ vault_sonar_admin_password }}"
+sonar_db_password: "{{ vault_sonar_db_password }}"
+jenkins_admin_password: "{{ vault_jenkins_admin_password }}"
+aws_account_id: "{{ vault_aws_account_id }}"
+nvd_api_key: "{{ vault_nvd_api_key | default('none') }}"
+github_user: "{{ vault_github_user }}"
+github_pat: "{{ vault_github_pat }}"

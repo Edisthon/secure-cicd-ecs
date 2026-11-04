@@ -1,0 +1,25 @@
+# secrets - never commit
+.env
+*.pem
+*.key
+secrets.txt
+# terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+!terraform/environments/dev/terraform.tfvars.example
+*tfplan*
+crash.log
+# scratch from scans
+.sca-deps/
+.scannerwork/
+__pycache__/
+*.pyc
+.pytest_cache/
+# NOTE: reports/, sbom/ and ecs/rendered/ are deliberately NOT ignored - the lab requires the
+# archived scan reports, SBOM and rendered task definition to be committed as evidence.
+jenkins/.env
+ansible/inventory.generated.ini
+ansible/group_vars/all/vault.yml
+ansible/.vault_pass

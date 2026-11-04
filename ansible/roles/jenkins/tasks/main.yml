@@ -1,0 +1,72 @@
+---
+# Secrets are files in {{ app_dir }}/secrets, mounted at /run/secrets - Configuration-as-Code resolves
+# ${NAME} from them, so credentials never sit in the Jenkins environment or in jenkins.yaml.
+- name: Write Jenkins secrets
+  ansible.builtin.copy:
+    dest: "{{ app_dir }}/secrets/{{ item.name }}"
+    content: "{{ item.value }}"
+    mode: "0400"
+  loop:
+    - { name: JENKINS_ADMIN_PASSWORD, value: "{{ jenkins_admin_password }}" }
+    - { name: AWS_ACCOUNT_ID,         value: "{{ aws_account_id }}" }
+    - { name: NVD_API_KEY,            value: "{{ nvd_api_key }}" }
+    - { name: GITHUB_USER,            value: "{{ github_user }}" }
+    - { name: GITHUB_PAT,             value: "{{ github_pat }}" }
+  loop_control: { label: "{{ item.name }}" }
+  no_log: true
+  notify: restart jenkins
+
+- name: Jenkins Configuration-as-Code (credentials, shared library, security, job)
+  ansible.builtin.template:
+    src: jenkins.yaml.j2
+    dest: /var/jenkins_home/casc/jenkins.yaml
+    mode: "0644"
+  notify: restart jenkins
+
+- name: Start Jenkins (rebuilds the image when the Dockerfile/plugins changed)
+  ansible.builtin.command: docker-compose up -d --build jenkins
+  args: { chdir: "{{ app_dir }}" }
+  register: jenkins_up
+  changed_when: "'Creating' in jenkins_up.stderr or 'Recreating' in jenkins_up.stderr"
+
+- name: Apply pending restarts now
+  ansible.builtin.meta: flush_handlers
+
+- name: Wait for the Jenkins login page
+  ansible.builtin.uri:
+    url: "http://localhost:8080/login"
+    status_code: [200, 403]
+  register: jenkins_ready
+  until: jenkins_ready.status in [200, 403]
+  retries: 60
+  delay: 10
+
+- name: GitHub push webhook -> Jenkins
+  when: manage_github_webhook | bool
+  delegate_to: localhost
+  become: false
+  block:
+    - name: List existing webhooks
+      ansible.builtin.uri:
+        url: "https://api.github.com/repos/{{ github_owner }}/{{ github_repo }}/hooks"
+        headers: { Authorization: "Bearer {{ github_pat }}", Accept: "application/vnd.github+json" }
+        return_content: true
+      register: gh_hooks
+      no_log: true
+
+    - name: Create the webhook if missing
+      ansible.builtin.uri:
+        url: "https://api.github.com/repos/{{ github_owner }}/{{ github_repo }}/hooks"
+        method: POST
+        headers: { Authorization: "Bearer {{ github_pat }}", Accept: "application/vnd.github+json" }
+        body_format: json
+        body:
+          name: web
+          active: true
+          events: [push, pull_request]
+          config:
+            url: "http://{{ jenkins_public_host }}:8080/github-webhook/"
+            content_type: json
+        status_code: 201
+      when: gh_hooks.json | selectattr('config.url', 'equalto', 'http://' ~ jenkins_public_host ~ ':8080/github-webhook/') | list | length == 0
+      no_log: true

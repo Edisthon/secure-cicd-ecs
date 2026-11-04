@@ -1,0 +1,14 @@
+output "ecr_repository_url" { value = module.ecr.repository_url }
+output "ecs_cluster" { value = module.ecs.cluster_name }
+output "ecs_service" { value = module.ecs.service_name }
+output "alb_dns_name" { value = module.ecs.alb_dns_name }
+output "log_group" { value = module.ecs.log_group_name }
+output "execution_role_arn" { value = module.ecs.execution_role_arn }
+output "task_role_arn" { value = module.ecs.task_role_arn }
+output "jenkins_deploy_policy_arn" { value = module.jenkins_access.policy_arn }
+output "alerts_topic_arn" { value = module.monitoring.sns_topic_arn }
+output "dashboard" { value = module.monitoring.dashboard_name }
+output "jenkins_instance_profile" { value = module.jenkins_access.instance_profile_name }
+output "jenkins_public_ip" { value = module.jenkins_host.public_ip }
+output "jenkins_url" { value = "http://${module.jenkins_host.public_ip}:8080" }
+output "jenkins_ssh" { value = "ssh -i ${var.ssh_private_key_path} ec2-user@${module.jenkins_host.public_ip}" }

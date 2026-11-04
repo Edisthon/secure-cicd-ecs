@@ -1,0 +1,12 @@
+title = "secure-cicd-ecs gitleaks config"
+
+[extend]
+useDefault = true          # keep every built-in rule (AWS keys, tokens, private keys, ...)
+
+[allowlist]
+description = "Generated output and documentation never carry real credentials"
+paths = [
+  '''reports/.*''',
+  '''sbom/.*''',
+  '''ecs/rendered/.*''',
+]

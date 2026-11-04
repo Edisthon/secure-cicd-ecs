@@ -1,0 +1,54 @@
+# Jenkins controller + SonarQube (Community) for the secure pipeline. Deployed by ansible/jenkins-sonar.yml.
+#
+# IMPORTANT (Docker-out-of-Docker): scan containers are started on the HOST daemon with
+# `-v "$PWD:/repo"`. That only works if the workspace path is identical inside the Jenkins container
+# and on the host, hence the same-path bind mount of /var/jenkins_home below.
+services:
+  jenkins:
+    build: .
+    container_name: jenkins
+    restart: unless-stopped
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - /var/jenkins_home:/var/jenkins_home          # same path inside and outside
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./secrets:/run/secrets:ro                    # JCasC reads ${NAME} from these files
+    environment:
+      - JAVA_OPTS=-Xmx1g -Djenkins.install.runSetupWizard=false
+      - CASC_JENKINS_CONFIG=/var/jenkins_home/casc/jenkins.yaml
+
+  sonarqube:
+    image: sonarqube:community
+    container_name: sonarqube
+    restart: unless-stopped
+    depends_on: [sonar-db]
+    ports:
+      - "9000:9000"
+    environment:
+      SONAR_JDBC_URL: jdbc:postgresql://sonar-db:5432/sonar
+      SONAR_JDBC_USERNAME: sonar
+      SONAR_JDBC_PASSWORD: ${SONAR_DB_PASSWORD:?set SONAR_DB_PASSWORD in jenkins/.env}
+    volumes:
+      - sonar_data:/opt/sonarqube/data
+      - sonar_extensions:/opt/sonarqube/extensions
+      - sonar_logs:/opt/sonarqube/logs
+
+  sonar-db:
+    image: postgres:16
+    container_name: sonar-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: ${SONAR_DB_PASSWORD:?set SONAR_DB_PASSWORD in jenkins/.env}
+      POSTGRES_DB: sonar
+    volumes:
+      - sonar_db:/var/lib/postgresql/data
+
+volumes:
+  sonar_data:
+  sonar_extensions:
+  sonar_logs:
+  sonar_db:

@@ -1,0 +1,70 @@
+---
+# Run from your laptop. Resizes the Jenkins EC2 host, grows its disk, attaches the IAM instance profile,
+# sets IMDS hop limit 2 (containers need it), then writes inventory.generated.ini with the (new) public IP.
+#
+#   ansible-playbook aws-prep.yml -e jenkins_instance_id=i-0123456789abcdef0 \
+#       -e jenkins_instance_profile=$(terraform -chdir=../terraform/environments/dev output -raw jenkins_instance_profile) \
+#       -e ssh_key_path=~/.ssh/jenkins-keypair
+- name: Prepare the Jenkins EC2 host
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars:
+    instance_type: t3.large      # SonarQube alone needs ~4 GB RAM
+    volume_size_gb: 40
+  tasks:
+    - name: Required variables are set
+      ansible.builtin.assert:
+        that: [jenkins_instance_id is defined, jenkins_instance_profile is defined, ssh_key_path is defined]
+        fail_msg: "pass -e jenkins_instance_id=... -e jenkins_instance_profile=... -e ssh_key_path=..."
+
+    - name: Instance size, IAM instance profile and IMDS settings
+      amazon.aws.ec2_instance:
+        region: "{{ aws_region | default('eu-west-1') }}"
+        instance_ids: ["{{ jenkins_instance_id }}"]
+        instance_type: "{{ instance_type }}"
+        iam_instance_profile: "{{ jenkins_instance_profile }}"
+        metadata_options:
+          http_endpoint: enabled
+          http_tokens: required
+          http_put_response_hop_limit: 2
+        state: running
+        wait: true
+
+    - name: Read the instance back (public IP changes after a stop/start)
+      amazon.aws.ec2_instance_info:
+        region: "{{ aws_region | default('eu-west-1') }}"
+        instance_ids: ["{{ jenkins_instance_id }}"]
+      register: ec2
+
+    - name: Current root volume size
+      ansible.builtin.command: >
+        aws ec2 describe-volumes --region {{ aws_region | default('eu-west-1') }}
+        --volume-ids {{ ec2.instances[0].block_device_mappings[0].ebs.volume_id }}
+        --query 'Volumes[0].Size' --output text
+      register: vol_size
+      changed_when: false
+
+    - name: Grow the root volume
+      ansible.builtin.command: >
+        aws ec2 modify-volume --region {{ aws_region | default('eu-west-1') }}
+        --volume-id {{ ec2.instances[0].block_device_mappings[0].ebs.volume_id }} --size {{ volume_size_gb }}
+      when: vol_size.stdout | int < volume_size_gb
+
+    - name: Wait for SSH
+      ansible.builtin.wait_for:
+        host: "{{ ec2.instances[0].public_ip_address }}"
+        port: 22
+        timeout: 300
+
+    - name: Write the inventory for the next playbook
+      ansible.builtin.copy:
+        dest: "{{ playbook_dir }}/inventory.generated.ini"
+        mode: "0644"
+        content: |
+          [jenkins_servers]
+          jenkins ansible_host={{ ec2.instances[0].public_ip_address }} ansible_user=ec2-user ansible_ssh_private_key_file={{ ssh_key_path }}
+
+    - name: Next step
+      ansible.builtin.debug:
+        msg: "Jenkins host is {{ ec2.instances[0].public_ip_address }}. Next: ansible-playbook site.yml --ask-vault-pass"

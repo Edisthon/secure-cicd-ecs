@@ -1,0 +1,56 @@
+---
+- name: Wait for cloud-init (Docker install from user_data) to finish
+  ansible.builtin.command: cloud-init status --wait
+  changed_when: false
+  failed_when: false
+
+- name: SonarQube's Elasticsearch needs a larger mmap limit
+  ansible.posix.sysctl:
+    name: vm.max_map_count
+    value: "262144"
+    state: present
+    sysctl_set: true
+
+- name: Grow the root partition to the resized volume
+  ansible.builtin.command: growpart /dev/nvme0n1 1
+  register: growpart
+  changed_when: growpart.rc == 0
+  failed_when: growpart.rc not in [0, 1]     # rc 1 = NOCHANGE (already grown)
+
+- name: Grow the XFS filesystem
+  ansible.builtin.command: xfs_growfs -d /
+  when: growpart.changed
+  changed_when: true
+
+- name: Docker is installed and running (installed by the Mod7 docker role)
+  ansible.builtin.systemd: { name: docker, state: started, enabled: true }
+
+- name: docker-compose is available
+  ansible.builtin.command: docker-compose version
+  changed_when: false
+
+# Same-path bind mount: scan containers started through the Docker socket resolve paths on the HOST.
+- name: Directories
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: directory
+    mode: "{{ item.mode }}"
+  loop:
+    - { path: /var/jenkins_home, mode: "0755" }
+    - { path: /var/jenkins_home/casc, mode: "0755" }
+    - { path: "{{ app_dir }}", mode: "0755" }
+    - { path: "{{ app_dir }}/secrets", mode: "0700" }
+
+- name: Copy the Jenkins/SonarQube compose project
+  ansible.builtin.copy:
+    src: "{{ playbook_dir }}/../jenkins/"
+    dest: "{{ app_dir }}/"
+    mode: "0644"
+  register: compose_project
+
+- name: Compose variables (.env holds only the database password)
+  ansible.builtin.copy:
+    dest: "{{ app_dir }}/.env"
+    content: "SONAR_DB_PASSWORD={{ sonar_db_password }}\n"
+    mode: "0600"
+  no_log: true

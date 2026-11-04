@@ -1,0 +1,4 @@
+---
+- name: restart jenkins
+  ansible.builtin.command: docker-compose up -d --build --force-recreate jenkins
+  args: { chdir: "{{ app_dir }}" }

@@ -1,0 +1,4 @@
+region                = "eu-west-1"
+allowed_ingress_cidrs = ["203.0.113.10/32"] # your public IP
+alert_email           = "you@example.com"
+jenkins_role_name     = ""                  # Jenkins EC2 instance role name from Mod7, if it has one

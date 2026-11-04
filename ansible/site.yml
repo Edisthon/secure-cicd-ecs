@@ -1,0 +1,12 @@
+---
+# Configures Jenkins + SonarQube end to end (replaces the manual steps and scripts/sonar-bootstrap.sh).
+#   ansible-galaxy collection install -r requirements.yml
+#   ansible-playbook site.yml --ask-vault-pass
+# Safe to re-run: every task checks current state first.
+- name: Jenkins + SonarQube
+  hosts: jenkins_servers
+  become: true
+  roles:
+    - host_prep     # kernel setting, disk grow, directories, compose project
+    - sonarqube     # start SonarQube, set admin password, token, Secure-Gate quality gate, project
+    - jenkins       # secrets, Configuration-as-Code (credentials, shared library, job), start, webhook

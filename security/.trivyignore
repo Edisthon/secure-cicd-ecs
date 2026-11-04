@@ -1,0 +1,3 @@
+# Trivy ignore list. Every entry MUST have a reason and an expiry/owner.
+# Format:  CVE-YYYY-NNNN   # reason, ticket, review-by date
+# (intentionally empty - the quality gate has no standing exceptions)

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- OWASP Dependency-Check suppressions. Each suppression needs a <notes> reason and an until date.
+     Intentionally empty: the quality gate has no standing exceptions. -->
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+</suppressions>
