@@ -8,7 +8,10 @@
 def call(Map config = [:]) {
     def file = config.taskDefFile ?: env.TASKDEF_FILE
     if (!file) { error 'ecsDeploy: taskDefFile is required (or run ecsRenderTaskDef first)' }
-    def arn = sh(returnStdout: true, script: "scripts/ecs-deploy.sh register '${file}' | tail -1").trim()
+    // No pipe here: a failed register must fail the stage (a "| tail -1" would hide the error).
+    sh "scripts/ecs-deploy.sh register '${file}'"
+    def arn = readFile('reports/taskdef-arn.txt').trim()
+    if (!arn) { error 'ecsDeploy: task definition registration returned no ARN' }
     env.TASKDEF_ARN = arn
     sh "scripts/ecs-deploy.sh update '${arn}'"
     sh 'scripts/ecs-deploy.sh wait'

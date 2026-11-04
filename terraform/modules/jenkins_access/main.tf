@@ -26,6 +26,11 @@ data "aws_iam_policy_document" "jenkins" {
     resources = ["*"]
   }
   statement {
+    sid       = "TagTaskDefinitionRevisions" # RegisterTaskDefinition with "tags" in the template needs this
+    actions   = ["ecs:TagResource"]
+    resources = ["arn:aws:ecs:${data.aws_region.current.region}:${data.aws_caller_identity.current.account_id}:task-definition/${var.name}-app:*"]
+  }
+  statement {
     sid       = "EcsService"
     actions   = ["ecs:UpdateService"]
     resources = ["*"]
