@@ -18,6 +18,9 @@ docker run --rm --network host \
 
 # Keep a record of the gate decision for the evidence pack.
 AUTH="$SONAR_TOKEN:"
-curl -fsS -u "$AUTH" "$SONAR_HOST_URL/api/qualitygates/project_status?projectKey=${SONAR_PROJECT_KEY:-secure-cicd-ecs}" \
-  -o "$REPORT_DIR/sonar-quality-gate.json" || log "could not fetch gate JSON (non-fatal)"
+# localhost:9000 is the HOST's port, not reachable from inside the Jenkins container, so fetch it
+# from a short-lived container on the host network (same approach as the scanner itself).
+docker run --rm --network host curlimages/curl:8.10.1 -fsS -u "$AUTH" \
+  "$SONAR_HOST_URL/api/qualitygates/project_status?projectKey=${SONAR_PROJECT_KEY:-secure-cicd-ecs}" \
+  > "$REPORT_DIR/sonar-quality-gate.json" || log "could not fetch gate JSON (non-fatal)"
 log "Quality Gate passed"
