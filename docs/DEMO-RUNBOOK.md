@@ -8,7 +8,7 @@ Save this as the **baseline success** (it also proves the clean dependency set).
 
 ## 1. Inject a vulnerable dependency (must FAIL)
 ```bash
-scripts/demo-inject-vuln.sh          # adds PyYAML==5.3 (critical CVE-2020-14343, fixed in 5.4) on demo/vulnerable-dependency
+scripts/demo-inject-vuln.sh          # adds PyJWT==1.7.1 (HIGH CVE-2022-29217, fixed in 2.4.0) on demo/vulnerable-dependency
 git push -u origin demo/vulnerable-dependency
 ```
 Expected in Jenkins:

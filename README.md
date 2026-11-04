@@ -5,9 +5,13 @@ and image vulnerabilities, an SBOM is produced, and **any Critical/High finding 
 before an image reaches ECR or ECS**. A passing build pushes an immutable versioned image to ECR, renders and
 registers a new ECS task definition revision, rolls the Fargate service onto it, and records what was deployed in Git (GitOps).
 
-> **Status:** this repo was authored and statically checked (JSON, YAML, shell syntax, HCL syntax, pytest, pip-audit on
-> the pinned dependencies). It has **not** been run against AWS or Jenkins yet - the evidence in `docs/EVIDENCE-CHECKLIST.md`
-> is what you produce when you run it.
+> **Status:** deployed and tested in a sandbox AWS account (eu-west-1). The pipeline has run green end to end (build #5:
+> all security gates passed, image pushed to ECR, ECS service updated and verified through the ALB). Remaining work and
+> evidence are tracked in `docs/LAB-LOG.md`.
+
+## Lab progress
+The lab is documented as it is done: see [`docs/LAB-LOG.md`](docs/LAB-LOG.md) for the step-by-step log, the issues found and
+fixed, and the screenshot index (`docs/screenshots/`). Evidence from each build is stored under `evidence/`.
 
 ## Architecture
 
