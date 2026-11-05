@@ -26,9 +26,9 @@ The README summarises this file; `EVIDENCE-CHECKLIST.md` is the submission check
 | 2 | Configure Jenkins + SonarQube (Ansible) | done | S03 |
 | 3 | First pipeline runs, real findings fixed | done | S04-S06 |
 | 4 | Baseline green run + deployment to ECS | done (build #5) | S07-S10 |
-| 5 | Demo: injected vulnerable dependency BLOCKS | todo | |
-| 6 | Demo: fix, gate PASSES, new revision deployed | todo | |
-| 7 | Optional: secret gate (Gitleaks) | todo | |
+| 5 | Demo: injected vulnerable dependency BLOCKS | done (build #2, 595e652) | S11-S13 |
+| 6 | Demo: fix, gate PASSES, new revision deployed | done (build #3, 335553f) | S14-S16 |
+| 7 | Optional: secret gate (Gitleaks) | done (build #1, 0d4d657) | S17-S18 |
 | 8 | Logs, alarms, dashboard after the deploy | todo | |
 | 9 | GitOps rollback test | todo | |
 | 10 | Cleanup of old ECR images / ECS revisions | todo | |
@@ -72,5 +72,23 @@ Evidence to capture: S04 Jenkins stage view of build #3 (red SAST/SCA/Trivy, Sec
 - **Result:** unit tests 10 passed; Gitleaks 0 findings; SonarQube gate PASSED; Dependency-Check and Trivy CRITICAL=0 HIGH=0; Syft SBOM with 2853 components; image `5-18c695c` pushed to ECR by digest; task definition revision 2 registered; rolling update completed with 2/2 tasks; ALB answered `/health` and `/version` = `5-18c695c`; deployment recorded on `env/dev`.
 - **Evidence to capture:** S07 stage view all green; S08 ECR repository (tags, scan results); S09 ECS service Deployments tab (revision 2, 2/2 running); S10 `curl http://<alb>/version` in a terminal. Download build #5 artifacts into `evidence/01-baseline-green/`.
 
-### 5-12. To do (fill in as we go)
+### 5. Injected vulnerable dependency is blocked (done)
+- **What:** branch `demo/vulnerable-dependency` adds `PyJWT==1.7.1` to `app/requirements.txt` (`scripts/demo-inject-vuln.sh`).
+- **Result (build #2, 595e652):** Gitleaks 0 findings, SonarQube gate passed, **Trivy failed: CRITICAL=1, HIGH=5**, all from `PyJWT-1.7.1` (fixed versions 2.12.0 to 2.14.0; critical is CVE-2026-102268, authentication bypass). Security Gate stopped the build: `Nothing was pushed or deployed`. Push, render, deploy and GitOps stages did not run.
+- **Finding worth reporting:** Dependency-Check (SCA) reported CRITICAL=0 HIGH=0 for the same dependency. It matches packages to CVEs by CPE and does not always match Python packages; Trivy matches by package ecosystem and caught it. This is why the pipeline runs more than one scanner.
+- **Proof nothing deployed:** ECR holds only `3-91a522b` and `4-c704cec` (no `2-595e652`); the service was untouched by this build.
+- **Evidence:** S11 stage view, S12 console (Trivy table and gate error), S13 terminal with the ECS and ECR checks; log in `evidence/02-blocked/`.
+
+### 6. Fix and re-run: gate passes (done)
+- **What:** `scripts/demo-fix-vuln.sh` removes the `PyJWT==1.7.1` pin and commits.
+- **Result (build #3, 335553f):** all scans clean (Trivy CRITICAL=0 HIGH=0), image `3-335553f` pushed by digest, task definition revision 4 registered, rolling deployment `COMPLETED` (about 3 minutes), live `/version` = `3-335553f`, GitOps record on `env/dev` (e50f8a2). Cleanup stage skipped (`RUN_CLEANUP` not set).
+- **Evidence:** S14 all-green stage view, S15 console, S16 `curl /version`; log in `evidence/03-fixed/`.
+
+### 7. Secret gate (done)
+- **What:** `scripts/demo-inject-secret.sh` commits a fake AWS key in `app/leaked.env` on branch `demo/leaked-secret` (key assembled at runtime, never in a tracked script).
+- **Result (build #1, 0d4d657):** Gitleaks rule `aws-access-token` found 1 leak in `app/leaked.env` (value redacted in the log); Security Gate failed the build; nothing pushed or deployed.
+- **Evidence:** S17 stage view, S18 console; log in `evidence/04-secret-blocked/`.
+- **Cleanup:** delete the demo branch afterwards (`git push origin --delete demo/leaked-secret`).
+
+### 8-12. To do (fill in as we go)
 Follow `DEMO-RUNBOOK.md`. For each step add an entry here with the result and the screenshot numbers.
