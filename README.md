@@ -32,6 +32,8 @@ flowchart LR
   CW --> AL[Alarms + dashboard + deployment events -> SNS]
 ```
 
+Infrastructure diagram with real AWS icons: `architecture.png` (rendered from `architecture.py` using the `diagrams` library).
+
 ## What maps to which lab requirement
 
 | Lab requirement | Where it is |
