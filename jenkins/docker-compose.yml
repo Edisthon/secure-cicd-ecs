@@ -19,6 +19,10 @@ services:
     environment:
       - JAVA_OPTS=-Xmx1g -Djenkins.install.runSetupWizard=false
       - CASC_JENKINS_CONFIG=/var/jenkins_home/casc/jenkins.yaml
+      # Sandbox accounts whose organization policy blocks the instance role: the pipeline's AWS CLI reads
+      # temporary credentials from this file instead (written by scripts/push-aws-creds.sh). If the file is
+      # absent the CLI falls back to the instance role.
+      - AWS_SHARED_CREDENTIALS_FILE=/run/secrets/aws_credentials
 
   sonarqube:
     image: sonarqube:community

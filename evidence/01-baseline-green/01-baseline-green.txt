@@ -1,0 +1,1037 @@
+Started by user admin
+Connecting to https://api.github.com using Edisthon/****** (GitHub PAT: clone, branch scan and GitOps record commits)
+Obtained Jenkinsfile from 91a522bd1802aedbf7d8f3b05dd25646b04e3074
+Loading library secure-pipeline-lib@main:jenkins-shared-library/
+Attempting to resolve main from remote references...
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+using GIT_ASKPASS to set credentials GitHub PAT: clone, branch scan and GitOps record commits
+ > git ls-remote -h -- https://github.com/Edisthon/secure-cicd-ecs.git # timeout=10
+Found match: refs/heads/main revision 91a522bd1802aedbf7d8f3b05dd25646b04e3074
+The recommended git tool is: NONE
+using credential github-gitops-token
+ > git rev-parse --resolve-git-dir /var/jenkins_home/jobs/secure-cicd-ecs/branches/main/workspace@libs/d411f3c563a8aaa2ffc83c959129ca23a296dcc547451557db201ae1d2d30ca9/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Edisthon/secure-cicd-ecs.git # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/Edisthon/secure-cicd-ecs.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+using GIT_ASKPASS to set credentials GitHub PAT: clone, branch scan and GitOps record commits
+ > git fetch --no-tags --force --progress -- https://github.com/Edisthon/secure-cicd-ecs.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Checking out Revision 91a522bd1802aedbf7d8f3b05dd25646b04e3074 (main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 91a522bd1802aedbf7d8f3b05dd25646b04e3074 # timeout=10
+Commit message: "Add lab log, evidence folder, switch demo vuln to PyJWT"
+ > git rev-list --no-walk 91a522bd1802aedbf7d8f3b05dd25646b04e3074 # timeout=10
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/jobs/secure-cicd-ecs/branches/main/workspace
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+The recommended git tool is: NONE
+using credential github-gitops-token
+ > git rev-parse --resolve-git-dir /var/jenkins_home/jobs/secure-cicd-ecs/branches/main/workspace/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/Edisthon/secure-cicd-ecs.git # timeout=10
+Fetching without tags
+Fetching upstream changes from https://github.com/Edisthon/secure-cicd-ecs.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+using GIT_ASKPASS to set credentials GitHub PAT: clone, branch scan and GitOps record commits
+ > git fetch --no-tags --force --progress -- https://github.com/Edisthon/secure-cicd-ecs.git +refs/heads/main:refs/remotes/origin/main # timeout=10
+Checking out Revision 91a522bd1802aedbf7d8f3b05dd25646b04e3074 (main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 91a522bd1802aedbf7d8f3b05dd25646b04e3074 # timeout=10
+Commit message: "Add lab log, evidence folder, switch demo vuln to PyJWT"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $NVD_API_KEY or $AWS_ACCOUNT_ID or $SONAR_TOKEN
+[Pipeline] {
+[Pipeline] withEnv
+Warning: A secret was passed to "withEnv" using Groovy String interpolation, which is insecure.
+		 Affected argument(s) used the following variable(s): [AWS_ACCOUNT_ID]
+		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
+[Pipeline] {
+[Pipeline] timestamps
+[Pipeline] {
+[Pipeline] timeout
+[2026-11-05T07:32:26.296Z] Timeout set to expire in 1 hr 15 min
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] checkout
+[2026-11-05T07:32:26.402Z] The recommended git tool is: NONE
+[2026-11-05T07:32:26.402Z] using credential github-gitops-token
+[2026-11-05T07:32:26.425Z]  > git rev-parse --resolve-git-dir /var/jenkins_home/jobs/secure-cicd-ecs/branches/main/workspace/.git # timeout=10
+[2026-11-05T07:32:26.430Z] Fetching changes from the remote Git repository
+[2026-11-05T07:32:26.432Z]  > git config remote.origin.url https://github.com/Edisthon/secure-cicd-ecs.git # timeout=10
+[2026-11-05T07:32:26.443Z] Fetching without tags
+[2026-11-05T07:32:26.444Z] Fetching upstream changes from https://github.com/Edisthon/secure-cicd-ecs.git
+[2026-11-05T07:32:26.444Z]  > git --version # timeout=10
+[2026-11-05T07:32:26.449Z]  > git --version # 'git version 2.47.3'
+[2026-11-05T07:32:26.449Z] using GIT_ASKPASS to set credentials GitHub PAT: clone, branch scan and GitOps record commits
+[2026-11-05T07:32:26.456Z]  > git fetch --no-tags --force --progress -- https://github.com/Edisthon/secure-cicd-ecs.git +refs/heads/main:refs/remotes/origin/main # timeout=10
+[2026-11-05T07:32:26.837Z] Checking out Revision 91a522bd1802aedbf7d8f3b05dd25646b04e3074 (main)
+[2026-11-05T07:32:26.837Z]  > git config core.sparsecheckout # timeout=10
+[2026-11-05T07:32:26.842Z]  > git checkout -f 91a522bd1802aedbf7d8f3b05dd25646b04e3074 # timeout=10
+[2026-11-05T07:32:26.849Z] Commit message: "Add lab log, evidence folder, switch demo vuln to PyJWT"
+[Pipeline] script
+[Pipeline] {
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] sh
+[2026-11-05T07:32:28.112Z] + mkdir -p reports sbom ecs/rendered
+[2026-11-05T07:32:28.112Z] + chmod +x scripts/_common.sh scripts/demo-fix-vuln.sh scripts/demo-inject-secret.sh scripts/demo-inject-vuln.sh scripts/dependency-check.sh scripts/ecr-push.sh scripts/ecs-cleanup.sh scripts/ecs-deploy.sh scripts/ecs-render-taskdef.sh scripts/gitleaks.sh scripts/gitops-record.sh scripts/sbom.sh scripts/sonar-bootstrap.sh scripts/sonar-scan.sh scripts/summarize-findings.sh scripts/trivy-scan.sh
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Unit Tests)
+[Pipeline] dir
+[2026-11-05T07:32:28.205Z] Running in /var/jenkins_home/jobs/secure-cicd-ecs/branches/main/workspace/app
+[Pipeline] {
+[Pipeline] sh
+[2026-11-05T07:32:28.499Z] + docker build --target test -t secure-cicd-app-test:3-91a522b .
+[2026-11-05T07:32:28.499Z] DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+[2026-11-05T07:32:28.499Z]             Install the buildx component to build images with BuildKit:
+[2026-11-05T07:32:28.499Z]             https://docs.docker.com/go/buildx/
+[2026-11-05T07:32:28.499Z] 
+[2026-11-05T07:32:28.499Z] Sending build context to Docker daemon  18.43kB[2026-11-05T07:32:28.499Z] 
+[2026-11-05T07:32:28.499Z] Step 1/10 : FROM python:3.13-slim AS base
+[2026-11-05T07:32:28.499Z]  ---> bdfc738a8a86
+[2026-11-05T07:32:28.499Z] Step 2/10 : ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
+[2026-11-05T07:32:28.499Z]  ---> Running in 07795bcb16b7
+[2026-11-05T07:32:28.499Z]  ---> Removed intermediate container 07795bcb16b7
+[2026-11-05T07:32:28.499Z]  ---> 97d29ab72749
+[2026-11-05T07:32:28.499Z] Step 3/10 : WORKDIR /usr/src/app
+[2026-11-05T07:32:28.499Z]  ---> Running in 00d0add1f84a
+[2026-11-05T07:32:28.499Z]  ---> Removed intermediate container 00d0add1f84a
+[2026-11-05T07:32:28.499Z]  ---> 3687ea1fba1f
+[2026-11-05T07:32:28.499Z] Step 4/10 : RUN apt-get update  && apt-get -y --no-install-recommends upgrade  && rm -rf /var/lib/apt/lists/*
+[2026-11-05T07:32:28.499Z]  ---> Running in 431a77a9a2f4
+[2026-11-05T07:32:29.052Z] Hit:1 http://deb.debian.org/debian trixie InRelease
+[2026-11-05T07:32:29.052Z] Get:2 http://deb.debian.org/debian trixie-updates InRelease [47.3 kB]
+[2026-11-05T07:32:29.052Z] Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+[2026-11-05T07:32:29.052Z] Get:4 http://deb.debian.org/debian trixie/main amd64 Packages [9678 kB]
+[2026-11-05T07:32:29.052Z] Get:5 http://deb.debian.org/debian trixie-updates/main amd64 Packages [1108 B]
+[2026-11-05T07:32:29.052Z] Get:6 http://deb.debian.org/debian-security trixie-security/main amd64 Packages [298 kB]
+[2026-11-05T07:32:29.963Z] Fetched 10.1 MB in 1s (8629 kB/s)
+[2026-11-05T07:32:30.874Z] Reading package lists...
+[2026-11-05T07:32:31.425Z] Reading package lists...
+[2026-11-05T07:32:31.676Z] Building dependency tree...
+[2026-11-05T07:32:31.676Z] Reading state information...
+[2026-11-05T07:32:32.184Z] Calculating upgrade...
+[2026-11-05T07:32:32.184Z] The following packages will be upgraded:
+[2026-11-05T07:32:32.184Z]   apt libapt-pkg7.0 tzdata
+[2026-11-05T07:32:32.184Z] 3 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+[2026-11-05T07:32:32.184Z] Need to get 2835 kB of archives.
+[2026-11-05T07:32:32.184Z] After this operation, 3072 B of additional disk space will be used.
+[2026-11-05T07:32:32.184Z] Get:1 http://deb.debian.org/debian-security trixie-security/main amd64 libapt-pkg7.0 amd64 3.0.4 [1114 kB]
+[2026-11-05T07:32:32.184Z] Get:2 http://deb.debian.org/debian-security trixie-security/main amd64 apt amd64 3.0.4 [1453 kB]
+[2026-11-05T07:32:32.184Z] Get:3 http://deb.debian.org/debian trixie-updates/main amd64 tzdata all 2026f-0+deb13u1 [268 kB]
+[2026-11-05T07:32:32.442Z] [91mdebconf: unable to initialize frontend: Dialog
+[2026-11-05T07:32:32.442Z] debconf: (TERM is not set, so the dialog frontend is not usable.)
+[2026-11-05T07:32:32.442Z] debconf: falling back to frontend: Readline
+[2026-11-05T07:32:32.442Z] [0m[91mdebconf: unable to initialize frontend: Readline
+[2026-11-05T07:32:32.442Z] debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8, <STDIN> line 3.)
+[2026-11-05T07:32:32.442Z] debconf: falling back to frontend: Teletype
+[2026-11-05T07:32:32.442Z] [0m[91mdebconf: unable to initialize frontend: Teletype
+[2026-11-05T07:32:32.442Z] debconf: (This frontend requires a controlling tty.)
+[2026-11-05T07:32:32.442Z] debconf: falling back to frontend: Noninteractive
+[2026-11-05T07:32:33.353Z] [0mPreconfiguring packages ...
+[2026-11-05T07:32:33.353Z] Fetched 2835 kB in 0s (87.0 MB/s)
+[2026-11-05T07:32:33.353Z] (Reading database ... [2026-11-05T07:32:33.353Z] (Reading database ... 5%[2026-11-05T07:32:33.353Z] (Reading database ... 10%[2026-11-05T07:32:33.353Z] (Reading database ... 15%[2026-11-05T07:32:33.353Z] (Reading database ... 20%[2026-11-05T07:32:33.353Z] (Reading database ... 25%[2026-11-05T07:32:33.353Z] (Reading database ... 30%[2026-11-05T07:32:33.353Z] (Reading database ... 35%[2026-11-05T07:32:33.353Z] (Reading database ... 40%[2026-11-05T07:32:33.353Z] (Reading database ... 45%[2026-11-05T07:32:33.353Z] (Reading database ... 50%[2026-11-05T07:32:33.353Z] (Reading database ... 55%[2026-11-05T07:32:33.353Z] (Reading database ... 60%[2026-11-05T07:32:33.353Z] (Reading database ... 65%[2026-11-05T07:32:33.353Z] (Reading database ... 70%[2026-11-05T07:32:33.353Z] (Reading database ... 75%[2026-11-05T07:32:33.353Z] (Reading database ... 80%[2026-11-05T07:32:33.353Z] (Reading database ... 85%[2026-11-05T07:32:33.353Z] (Reading database ... 90%[2026-11-05T07:32:33.353Z] (Reading database ... 95%[2026-11-05T07:32:33.353Z] (Reading database ... 100%[2026-11-05T07:32:33.353Z] (Reading database ... 5658 files and directories currently installed.)
+[2026-11-05T07:32:33.353Z] Preparing to unpack .../libapt-pkg7.0_3.0.4_amd64.deb ...
+[2026-11-05T07:32:33.353Z] Unpacking libapt-pkg7.0:amd64 (3.0.4) over (3.0.3) ...
+[2026-11-05T07:32:33.353Z] Setting up libapt-pkg7.0:amd64 (3.0.4) ...
+[2026-11-05T07:32:33.353Z] (Reading database ... [2026-11-05T07:32:33.353Z] (Reading database ... 5%[2026-11-05T07:32:33.353Z] (Reading database ... 10%[2026-11-05T07:32:33.353Z] (Reading database ... 15%[2026-11-05T07:32:33.353Z] (Reading database ... 20%[2026-11-05T07:32:33.354Z] (Reading database ... 25%[2026-11-05T07:32:33.354Z] (Reading database ... 30%[2026-11-05T07:32:33.354Z] (Reading database ... 35%[2026-11-05T07:32:33.354Z] (Reading database ... 40%[2026-11-05T07:32:33.354Z] (Reading database ... 45%[2026-11-05T07:32:33.354Z] (Reading database ... 50%[2026-11-05T07:32:33.354Z] (Reading database ... 55%[2026-11-05T07:32:33.354Z] (Reading database ... 60%[2026-11-05T07:32:33.354Z] (Reading database ... 65%[2026-11-05T07:32:33.354Z] (Reading database ... 70%[2026-11-05T07:32:33.354Z] (Reading database ... 75%[2026-11-05T07:32:33.354Z] (Reading database ... 80%[2026-11-05T07:32:33.354Z] (Reading database ... 85%[2026-11-05T07:32:33.354Z] (Reading database ... 90%[2026-11-05T07:32:33.354Z] (Reading database ... 95%[2026-11-05T07:32:33.354Z] (Reading database ... 100%[2026-11-05T07:32:33.354Z] (Reading database ... 5658 files and directories currently installed.)
+[2026-11-05T07:32:33.354Z] Preparing to unpack .../archives/apt_3.0.4_amd64.deb ...
+[2026-11-05T07:32:33.604Z] Unpacking apt (3.0.4) over (3.0.3) ...
+[2026-11-05T07:32:33.604Z] Setting up apt (3.0.4) ...
+[2026-11-05T07:32:33.855Z] (Reading database ... [2026-11-05T07:32:33.855Z] (Reading database ... 5%[2026-11-05T07:32:33.855Z] (Reading database ... 10%[2026-11-05T07:32:33.855Z] (Reading database ... 15%[2026-11-05T07:32:33.855Z] (Reading database ... 20%[2026-11-05T07:32:33.855Z] (Reading database ... 25%[2026-11-05T07:32:33.855Z] (Reading database ... 30%[2026-11-05T07:32:33.855Z] (Reading database ... 35%[2026-11-05T07:32:33.855Z] (Reading database ... 40%[2026-11-05T07:32:33.855Z] (Reading database ... 45%[2026-11-05T07:32:33.855Z] (Reading database ... 50%[2026-11-05T07:32:33.855Z] (Reading database ... 55%[2026-11-05T07:32:33.855Z] (Reading database ... 60%[2026-11-05T07:32:33.855Z] (Reading database ... 65%[2026-11-05T07:32:33.855Z] (Reading database ... 70%[2026-11-05T07:32:33.855Z] (Reading database ... 75%[2026-11-05T07:32:33.855Z] (Reading database ... 80%[2026-11-05T07:32:33.855Z] (Reading database ... 85%[2026-11-05T07:32:33.855Z] (Reading database ... 90%[2026-11-05T07:32:33.855Z] (Reading database ... 95%[2026-11-05T07:32:33.855Z] (Reading database ... 100%[2026-11-05T07:32:33.855Z] (Reading database ... 5658 files and directories currently installed.)
+[2026-11-05T07:32:33.855Z] Preparing to unpack .../tzdata_2026f-0+deb13u1_all.deb ...
+[2026-11-05T07:32:33.855Z] Unpacking tzdata (2026f-0+deb13u1) over (2026e-0+deb13u1) ...
+[2026-11-05T07:32:34.405Z] Setting up tzdata (2026f-0+deb13u1) ...
+[2026-11-05T07:32:34.405Z] debconf: unable to initialize frontend: Dialog
+[2026-11-05T07:32:34.405Z] debconf: (TERM is not set, so the dialog frontend is not usable.)
+[2026-11-05T07:32:34.405Z] debconf: falling back to frontend: Readline
+[2026-11-05T07:32:34.405Z] debconf: unable to initialize frontend: Readline
+[2026-11-05T07:32:34.406Z] debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 8.)
+[2026-11-05T07:32:34.406Z] debconf: falling back to frontend: Teletype
+[2026-11-05T07:32:34.406Z] debconf: unable to initialize frontend: Teletype
+[2026-11-05T07:32:34.406Z] debconf: (This frontend requires a controlling tty.)
+[2026-11-05T07:32:34.406Z] debconf: falling back to frontend: Noninteractive
+[2026-11-05T07:32:34.406Z] 
+[2026-11-05T07:32:34.406Z] Current default time zone: 'Etc/UTC'
+[2026-11-05T07:32:34.406Z] Local time is now:      Thu Nov  5 07:32:34 UTC 2026.
+[2026-11-05T07:32:34.406Z] Universal Time is now:  Thu Nov  5 07:32:34 UTC 2026.
+[2026-11-05T07:32:34.406Z] Run 'dpkg-reconfigure tzdata' if you wish to change it.
+[2026-11-05T07:32:34.406Z] 
+[2026-11-05T07:32:34.406Z] Processing triggers for libc-bin (2.41-12+deb13u4) ...
+[2026-11-05T07:32:34.956Z]  ---> Removed intermediate container 431a77a9a2f4
+[2026-11-05T07:32:34.956Z]  ---> c00eee1cc59d
+[2026-11-05T07:32:34.956Z] Step 5/10 : COPY requirements.txt ./
+[2026-11-05T07:32:34.956Z]  ---> 5f41a2a98f46
+[2026-11-05T07:32:34.956Z] Step 6/10 : RUN pip install -r requirements.txt
+[2026-11-05T07:32:35.207Z]  ---> Running in 5973dbb5306a
+[2026-11-05T07:32:37.069Z] Collecting blinker==1.9.0 (from -r requirements.txt (line 3))
+[2026-11-05T07:32:37.069Z]   Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+[2026-11-05T07:32:37.069Z] Collecting certifi==2026.10.23 (from -r requirements.txt (line 4))
+[2026-11-05T07:32:37.069Z]   Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+[2026-11-05T07:32:37.069Z] Collecting charset-normalizer==3.5.2 (from -r requirements.txt (line 5))
+[2026-11-05T07:32:37.069Z]   Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+[2026-11-05T07:32:37.069Z] Collecting click==8.5.0 (from -r requirements.txt (line 6))
+[2026-11-05T07:32:37.069Z]   Downloading click-8.5.0-py3-none-any.whl.metadata (2.6 kB)
+[2026-11-05T07:32:37.069Z] Collecting Flask==3.1.3 (from -r requirements.txt (line 7))
+[2026-11-05T07:32:37.069Z]   Downloading flask-3.1.3-py3-none-any.whl.metadata (3.2 kB)
+[2026-11-05T07:32:37.069Z] Collecting googleapis-common-protos==1.76.0 (from -r requirements.txt (line 8))
+[2026-11-05T07:32:37.319Z]   Downloading googleapis_common_protos-1.76.0-py3-none-any.whl.metadata (8.5 kB)
+[2026-11-05T07:32:37.870Z] Collecting grpcio==1.85.0 (from -r requirements.txt (line 9))
+[2026-11-05T07:32:37.870Z]   Downloading grpcio-1.85.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (3.8 kB)
+[2026-11-05T07:32:37.870Z] Collecting gunicorn==26.2.0 (from -r requirements.txt (line 10))
+[2026-11-05T07:32:37.870Z]   Downloading gunicorn-26.2.0-py3-none-any.whl.metadata (5.5 kB)
+[2026-11-05T07:32:37.870Z] Collecting idna==3.20 (from -r requirements.txt (line 11))
+[2026-11-05T07:32:37.870Z]   Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+[2026-11-05T07:32:37.870Z] Collecting itsdangerous==2.2.0 (from -r requirements.txt (line 12))
+[2026-11-05T07:32:37.870Z]   Downloading itsdangerous-2.2.0-py3-none-any.whl.metadata (1.9 kB)
+[2026-11-05T07:32:37.870Z] Collecting Jinja2==3.1.6 (from -r requirements.txt (line 13))
+[2026-11-05T07:32:37.870Z]   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+[2026-11-05T07:32:37.870Z] Collecting MarkupSafe==3.0.4 (from -r requirements.txt (line 14))
+[2026-11-05T07:32:37.870Z]   Downloading markupsafe-3.0.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+[2026-11-05T07:32:37.870Z] Collecting opentelemetry-api==1.45.2 (from -r requirements.txt (line 15))
+[2026-11-05T07:32:37.870Z]   Downloading opentelemetry_api-1.45.2-py3-none-any.whl.metadata (1.4 kB)
+[2026-11-05T07:32:37.870Z] Collecting opentelemetry-exporter-http-transport==0.66b2 (from -r requirements.txt (line 16))
+[2026-11-05T07:32:37.870Z]   Downloading opentelemetry_exporter_http_transport-0.66b2-py3-none-any.whl.metadata (2.3 kB)
+[2026-11-05T07:32:37.870Z] Collecting opentelemetry-exporter-otlp==1.45.2 (from -r requirements.txt (line 17))
+[2026-11-05T07:32:37.870Z]   Downloading opentelemetry_exporter_otlp-1.45.2-py3-none-any.whl.metadata (2.4 kB)
+[2026-11-05T07:32:37.870Z] Collecting opentelemetry-exporter-otlp-common==0.66b2 (from -r requirements.txt (line 18))
+[2026-11-05T07:32:37.871Z]   Downloading opentelemetry_exporter_otlp_common-0.66b2-py3-none-any.whl.metadata (1.9 kB)
+[2026-11-05T07:32:37.871Z] Collecting opentelemetry-exporter-otlp-proto-common==1.45.2 (from -r requirements.txt (line 19))
+[2026-11-05T07:32:37.871Z]   Downloading opentelemetry_exporter_otlp_proto_common-1.45.2-py3-none-any.whl.metadata (1.8 kB)
+[2026-11-05T07:32:37.871Z] Collecting opentelemetry-exporter-otlp-proto-grpc==1.45.2 (from -r requirements.txt (line 20))
+[2026-11-05T07:32:37.871Z]   Downloading opentelemetry_exporter_otlp_proto_grpc-1.45.2-py3-none-any.whl.metadata (2.6 kB)
+[2026-11-05T07:32:37.871Z] Collecting opentelemetry-exporter-otlp-proto-http==1.45.2 (from -r requirements.txt (line 21))
+[2026-11-05T07:32:37.871Z]   Downloading opentelemetry_exporter_otlp_proto_http-1.45.2-py3-none-any.whl.metadata (3.0 kB)
+[2026-11-05T07:32:38.121Z] Collecting opentelemetry-instrumentation==0.66b2 (from -r requirements.txt (line 22))
+[2026-11-05T07:32:38.121Z]   Downloading opentelemetry_instrumentation-0.66b2-py3-none-any.whl.metadata (7.2 kB)
+[2026-11-05T07:32:38.121Z] Collecting opentelemetry-instrumentation-flask==0.66b2 (from -r requirements.txt (line 23))
+[2026-11-05T07:32:38.121Z]   Downloading opentelemetry_instrumentation_flask-0.66b2-py3-none-any.whl.metadata (2.2 kB)
+[2026-11-05T07:32:38.121Z] Collecting opentelemetry-instrumentation-requests==0.66b2 (from -r requirements.txt (line 24))
+[2026-11-05T07:32:38.121Z]   Downloading opentelemetry_instrumentation_requests-0.66b2-py3-none-any.whl.metadata (2.6 kB)
+[2026-11-05T07:32:38.121Z] Collecting opentelemetry-instrumentation-wsgi==0.66b2 (from -r requirements.txt (line 25))
+[2026-11-05T07:32:38.121Z]   Downloading opentelemetry_instrumentation_wsgi-0.66b2-py3-none-any.whl.metadata (2.1 kB)
+[2026-11-05T07:32:38.121Z] Collecting opentelemetry-proto==1.45.2 (from -r requirements.txt (line 26))
+[2026-11-05T07:32:38.121Z]   Downloading opentelemetry_proto-1.45.2-py3-none-any.whl.metadata (2.3 kB)
+[2026-11-05T07:32:38.121Z] Collecting opentelemetry-sdk==1.45.2 (from -r requirements.txt (line 27))
+[2026-11-05T07:32:38.121Z]   Downloading opentelemetry_sdk-1.45.2-py3-none-any.whl.metadata (1.6 kB)
+[2026-11-05T07:32:38.122Z] Collecting opentelemetry-semantic-conventions==0.66b2 (from -r requirements.txt (line 28))
+[2026-11-05T07:32:38.122Z]   Downloading opentelemetry_semantic_conventions-0.66b2-py3-none-any.whl.metadata (2.4 kB)
+[2026-11-05T07:32:38.122Z] Collecting opentelemetry-util-http==0.66b2 (from -r requirements.txt (line 29))
+[2026-11-05T07:32:38.122Z]   Downloading opentelemetry_util_http-0.66b2-py3-none-any.whl.metadata (2.6 kB)
+[2026-11-05T07:32:38.122Z] Collecting packaging==26.3 (from -r requirements.txt (line 30))
+[2026-11-05T07:32:38.122Z]   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+[2026-11-05T07:32:38.122Z] Collecting prometheus_client==0.26.0 (from -r requirements.txt (line 31))
+[2026-11-05T07:32:38.122Z]   Downloading prometheus_client-0.26.0-py3-none-any.whl.metadata (2.1 kB)
+[2026-11-05T07:32:38.372Z] Collecting protobuf==7.36.2 (from -r requirements.txt (line 32))
+[2026-11-05T07:32:38.372Z]   Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl.metadata (595 bytes)
+[2026-11-05T07:32:38.372Z] Collecting requests==2.34.2 (from -r requirements.txt (line 33))
+[2026-11-05T07:32:38.372Z]   Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+[2026-11-05T07:32:38.372Z] Collecting typing_extensions==4.16.0 (from -r requirements.txt (line 34))
+[2026-11-05T07:32:38.372Z]   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+[2026-11-05T07:32:38.372Z] Collecting urllib3==2.8.0 (from -r requirements.txt (line 35))
+[2026-11-05T07:32:38.372Z]   Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+[2026-11-05T07:32:38.372Z] Collecting Werkzeug==3.1.9 (from -r requirements.txt (line 36))
+[2026-11-05T07:32:38.372Z]   Downloading werkzeug-3.1.9-py3-none-any.whl.metadata (4.1 kB)
+[2026-11-05T07:32:38.923Z] Collecting wrapt==2.5.2 (from -r requirements.txt (line 37))
+[2026-11-05T07:32:38.923Z]   Downloading wrapt-2.5.2-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (7.6 kB)
+[2026-11-05T07:32:38.923Z] Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+[2026-11-05T07:32:38.923Z] Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+[2026-11-05T07:32:38.923Z] Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (254 kB)
+[2026-11-05T07:32:38.923Z] Downloading click-8.5.0-py3-none-any.whl (125 kB)
+[2026-11-05T07:32:38.923Z] Downloading flask-3.1.3-py3-none-any.whl (103 kB)
+[2026-11-05T07:32:38.923Z] Downloading googleapis_common_protos-1.76.0-py3-none-any.whl (307 kB)
+[2026-11-05T07:32:38.923Z] Downloading protobuf-7.36.2-cp310-abi3-manylinux2014_x86_64.whl (343 kB)
+[2026-11-05T07:32:38.923Z] Downloading grpcio-1.85.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (7.4 MB)
+[2026-11-05T07:32:39.174Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.4/7.4 MB 52.9 MB/s  0:00:00
+[2026-11-05T07:32:39.174Z] Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+[2026-11-05T07:32:39.174Z] Downloading gunicorn-26.2.0-py3-none-any.whl (228 kB)
+[2026-11-05T07:32:39.174Z] Downloading idna-3.20-py3-none-any.whl (69 kB)
+[2026-11-05T07:32:39.174Z] Downloading itsdangerous-2.2.0-py3-none-any.whl (16 kB)
+[2026-11-05T07:32:39.174Z] Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+[2026-11-05T07:32:39.174Z] Downloading markupsafe-3.0.4-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (23 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_api-1.45.2-py3-none-any.whl (60 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_exporter_http_transport-0.66b2-py3-none-any.whl (12 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_exporter_otlp-1.45.2-py3-none-any.whl (6.7 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_exporter_otlp_common-0.66b2-py3-none-any.whl (12 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_sdk-1.45.2-py3-none-any.whl (141 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_exporter_otlp_proto_common-1.45.2-py3-none-any.whl (15 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_exporter_otlp_proto_grpc-1.45.2-py3-none-any.whl (19 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_exporter_otlp_proto_http-1.45.2-py3-none-any.whl (22 kB)
+[2026-11-05T07:32:39.174Z] Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+[2026-11-05T07:32:39.174Z] Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_instrumentation-0.66b2-py3-none-any.whl (36 kB)
+[2026-11-05T07:32:39.174Z] Downloading wrapt-2.5.2-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (248 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_instrumentation_flask-0.66b2-py3-none-any.whl (14 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_instrumentation_requests-0.66b2-py3-none-any.whl (13 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_instrumentation_wsgi-0.66b2-py3-none-any.whl (13 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_proto-1.45.2-py3-none-any.whl (72 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_semantic_conventions-0.66b2-py3-none-any.whl (206 kB)
+[2026-11-05T07:32:39.174Z] Downloading opentelemetry_util_http-0.66b2-py3-none-any.whl (8.4 kB)
+[2026-11-05T07:32:39.174Z] Downloading packaging-26.3-py3-none-any.whl (129 kB)
+[2026-11-05T07:32:39.174Z] Downloading prometheus_client-0.26.0-py3-none-any.whl (64 kB)
+[2026-11-05T07:32:39.174Z] Downloading werkzeug-3.1.9-py3-none-any.whl (228 kB)
+[2026-11-05T07:32:39.425Z] Installing collected packages: wrapt, urllib3, typing_extensions, protobuf, prometheus_client, packaging, opentelemetry-util-http, MarkupSafe, itsdangerous, idna, gunicorn, click, charset-normalizer, certifi, blinker, Werkzeug, requests, opentelemetry-proto, opentelemetry-api, Jinja2, grpcio, googleapis-common-protos, opentelemetry-semantic-conventions, opentelemetry-exporter-otlp-proto-common, opentelemetry-exporter-http-transport, Flask, opentelemetry-sdk, opentelemetry-instrumentation, opentelemetry-instrumentation-wsgi, opentelemetry-instrumentation-requests, opentelemetry-exporter-otlp-common, opentelemetry-instrumentation-flask, opentelemetry-exporter-otlp-proto-http, opentelemetry-exporter-otlp-proto-grpc, opentelemetry-exporter-otlp
+[2026-11-05T07:32:41.908Z] 
+[2026-11-05T07:32:41.908Z] Successfully installed Flask-3.1.3 Jinja2-3.1.6 MarkupSafe-3.0.4 Werkzeug-3.1.9 blinker-1.9.0 certifi-2026.10.23 charset-normalizer-3.5.2 click-8.5.0 googleapis-common-protos-1.76.0 grpcio-1.85.0 gunicorn-26.2.0 idna-3.20 itsdangerous-2.2.0 opentelemetry-api-1.45.2 opentelemetry-exporter-http-transport-0.66b2 opentelemetry-exporter-otlp-1.45.2 opentelemetry-exporter-otlp-common-0.66b2 opentelemetry-exporter-otlp-proto-common-1.45.2 opentelemetry-exporter-otlp-proto-grpc-1.45.2 opentelemetry-exporter-otlp-proto-http-1.45.2 opentelemetry-instrumentation-0.66b2 opentelemetry-instrumentation-flask-0.66b2 opentelemetry-instrumentation-requests-0.66b2 opentelemetry-instrumentation-wsgi-0.66b2 opentelemetry-proto-1.45.2 opentelemetry-sdk-1.45.2 opentelemetry-semantic-conventions-0.66b2 opentelemetry-util-http-0.66b2 packaging-26.3 prometheus_client-0.26.0 protobuf-7.36.2 requests-2.34.2 typing_extensions-4.16.0 urllib3-2.8.0 wrapt-2.5.2
+[2026-11-05T07:32:41.908Z] [91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+[2026-11-05T07:32:41.908Z] [0m[91m
+[2026-11-05T07:32:41.908Z] [notice] A new release of pip is available: 26.2.2 -> 26.3
+[2026-11-05T07:32:41.909Z] [notice] To update, run: pip install --upgrade pip
+[2026-11-05T07:32:43.252Z] [0m ---> Removed intermediate container 5973dbb5306a
+[2026-11-05T07:32:43.252Z]  ---> ff38e810605e
+[2026-11-05T07:32:43.252Z] Step 7/10 : COPY app.py instrumentation.py ./
+[2026-11-05T07:32:43.252Z]  ---> 0bc4deab73a3
+[2026-11-05T07:32:43.252Z] Step 8/10 : FROM base AS test
+[2026-11-05T07:32:43.252Z]  ---> 0bc4deab73a3
+[2026-11-05T07:32:43.252Z] Step 9/10 : COPY requirements-dev.txt test_app.py ./
+[2026-11-05T07:32:43.252Z]  ---> 8c961f84e475
+[2026-11-05T07:32:43.252Z] Step 10/10 : RUN pip install -r requirements-dev.txt && pytest -q test_app.py
+[2026-11-05T07:32:43.252Z]  ---> Running in b757465f67d2
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: blinker==1.9.0 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 3)) (1.9.0)
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: certifi==2026.10.23 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 4)) (2026.10.23)
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: charset-normalizer==3.5.2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 5)) (3.5.2)
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: click==8.5.0 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 6)) (8.5.0)
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: Flask==3.1.3 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 7)) (3.1.3)
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: googleapis-common-protos==1.76.0 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 8)) (1.76.0)
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: grpcio==1.85.0 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 9)) (1.85.0)
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: gunicorn==26.2.0 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 10)) (26.2.0)
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: idna==3.20 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 11)) (3.20)
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: itsdangerous==2.2.0 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 12)) (2.2.0)
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: Jinja2==3.1.6 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 13)) (3.1.6)
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: MarkupSafe==3.0.4 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 14)) (3.0.4)
+[2026-11-05T07:32:45.114Z] Requirement already satisfied: opentelemetry-api==1.45.2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 15)) (1.45.2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-exporter-http-transport==0.66b2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 16)) (0.66b2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-exporter-otlp==1.45.2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 17)) (1.45.2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-exporter-otlp-common==0.66b2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 18)) (0.66b2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-exporter-otlp-proto-common==1.45.2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 19)) (1.45.2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-exporter-otlp-proto-grpc==1.45.2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 20)) (1.45.2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-exporter-otlp-proto-http==1.45.2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 21)) (1.45.2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-instrumentation==0.66b2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 22)) (0.66b2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-instrumentation-flask==0.66b2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 23)) (0.66b2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-instrumentation-requests==0.66b2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 24)) (0.66b2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-instrumentation-wsgi==0.66b2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 25)) (0.66b2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-proto==1.45.2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 26)) (1.45.2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-sdk==1.45.2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 27)) (1.45.2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-semantic-conventions==0.66b2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 28)) (0.66b2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: opentelemetry-util-http==0.66b2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 29)) (0.66b2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: packaging==26.3 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 30)) (26.3)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: prometheus_client==0.26.0 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 31)) (0.26.0)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: protobuf==7.36.2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 32)) (7.36.2)
+[2026-11-05T07:32:45.115Z] Requirement already satisfied: requests==2.34.2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 33)) (2.34.2)
+[2026-11-05T07:32:45.116Z] Requirement already satisfied: typing_extensions==4.16.0 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 34)) (4.16.0)
+[2026-11-05T07:32:45.116Z] Requirement already satisfied: urllib3==2.8.0 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 35)) (2.8.0)
+[2026-11-05T07:32:45.116Z] Requirement already satisfied: Werkzeug==3.1.9 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 36)) (3.1.9)
+[2026-11-05T07:32:45.116Z] Requirement already satisfied: wrapt==2.5.2 in /usr/local/lib/python3.13/site-packages (from -r /usr/src/app/requirements.txt (line 37)) (2.5.2)
+[2026-11-05T07:32:45.116Z] Collecting pytest==9.2.0 (from -r requirements-dev.txt (line 2))
+[2026-11-05T07:32:45.116Z]   Downloading pytest-9.2.0-py3-none-any.whl.metadata (7.9 kB)
+[2026-11-05T07:32:45.116Z] Collecting iniconfig>=2 (from pytest==9.2.0->-r requirements-dev.txt (line 2))
+[2026-11-05T07:32:45.116Z]   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+[2026-11-05T07:32:45.116Z] Collecting pluggy<2,>=1.6 (from pytest==9.2.0->-r requirements-dev.txt (line 2))
+[2026-11-05T07:32:45.116Z]   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+[2026-11-05T07:32:45.116Z] Collecting pygments>=2.15 (from pytest==9.2.0->-r requirements-dev.txt (line 2))
+[2026-11-05T07:32:45.116Z]   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+[2026-11-05T07:32:45.116Z] Downloading pytest-9.2.0-py3-none-any.whl (411 kB)
+[2026-11-05T07:32:45.116Z] Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+[2026-11-05T07:32:45.116Z] Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+[2026-11-05T07:32:45.116Z] Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+[2026-11-05T07:32:45.116Z]    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 138.6 MB/s  0:00:00
+[2026-11-05T07:32:45.367Z] Installing collected packages: pygments, pluggy, iniconfig, pytest
+[2026-11-05T07:32:46.710Z] 
+[2026-11-05T07:32:46.710Z] Successfully installed iniconfig-2.3.1 pluggy-1.7.0 pygments-2.21.0 pytest-9.2.0
+[2026-11-05T07:32:46.710Z] [91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+[2026-11-05T07:32:46.710Z] [0m[91m
+[2026-11-05T07:32:46.710Z] [notice] A new release of pip is available: 26.2.2 -> 26.3
+[2026-11-05T07:32:46.710Z] [notice] To update, run: pip install --upgrade pip
+[2026-11-05T07:32:48.304Z] [0m..........                                                               [100%]
+[2026-11-05T07:32:48.304Z] 10 passed in 1.16s
+[2026-11-05T07:32:49.215Z]  ---> Removed intermediate container b757465f67d2
+[2026-11-05T07:32:49.215Z]  ---> 98dab1a1be02
+[2026-11-05T07:32:49.215Z] Successfully built 98dab1a1be02
+[2026-11-05T07:32:49.215Z] Successfully tagged secure-cicd-app-test:3-91a522b
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Security Scans (code))
+[Pipeline] parallel
+[Pipeline] { (Branch: Secret Scan - Gitleaks)
+[Pipeline] { (Branch: SAST - SonarQube)
+[Pipeline] { (Branch: SCA - Dependency-Check)
+[Pipeline] stage
+[Pipeline] { (Secret Scan - Gitleaks)
+[Pipeline] stage
+[Pipeline] { (SAST - SonarQube)
+[Pipeline] stage
+[Pipeline] { (SCA - Dependency-Check)
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
+[Pipeline] sh
+[Pipeline] sh
+[2026-11-05T07:32:49.933Z] + scripts/gitleaks.sh
+[2026-11-05T07:32:49.933Z] [gitleaks.sh] Running Gitleaks (zricethezav/gitleaks:v8.18.4)
+[2026-11-05T07:32:49.960Z] + scripts/sonar-scan.sh
+[2026-11-05T07:32:49.961Z] [sonar-scan.sh] Running SonarScanner against http://localhost:9000 (project version 3-91a522b)
+[2026-11-05T07:32:50.006Z] + scripts/dependency-check.sh
+[2026-11-05T07:32:50.006Z] [dependency-check.sh] Resolving pinned dependencies from app/requirements.txt
+[2026-11-05T07:32:50.484Z] 
+[2026-11-05T07:32:50.484Z]     ○
+[2026-11-05T07:32:50.484Z]     │╲
+[2026-11-05T07:32:50.484Z]     │ ○
+[2026-11-05T07:32:50.484Z]     ○ ░
+[2026-11-05T07:32:50.484Z]     ░    gitleaks
+[2026-11-05T07:32:50.484Z] 
+[2026-11-05T07:32:50.484Z] [90m7:32AM[0m [32mINF[0m 6 commits scanned.
+[2026-11-05T07:32:50.484Z] [90m7:32AM[0m [32mINF[0m scan completed in 95.5ms
+[2026-11-05T07:32:50.484Z] [90m7:32AM[0m [32mINF[0m no leaks found
+[2026-11-05T07:32:50.734Z] [gitleaks.sh] No secrets detected
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[2026-11-05T07:32:51.305Z] 07:32:51.261 INFO  Scanner configuration file: /opt/sonar-scanner/conf/sonar-scanner.properties
+[2026-11-05T07:32:51.305Z] 07:32:51.280 INFO  Project root configuration file: /usr/src/sonar-project.properties
+[2026-11-05T07:32:51.555Z] 07:32:51.334 INFO  SonarScanner CLI 7.3.0.5189
+[2026-11-05T07:32:51.556Z] 07:32:51.346 INFO  Linux 6.18.56-125.164.amzn2023.x86_64 amd64
+[2026-11-05T07:32:54.784Z] 07:32:54.595 INFO  Communicating with SonarQube Community Build 26.10.0.133078
+[2026-11-05T07:32:54.784Z] 07:32:54.600 INFO  JRE provisioning: os[linux], arch[x86_64]
+[2026-11-05T07:32:59.980Z] 07:32:59.915 INFO  Starting SonarScanner Engine...
+[2026-11-05T07:32:59.980Z] 07:32:59.916 INFO  Java 21.0.12.1 Eclipse Adoptium (64-bit)
+[2026-11-05T07:33:04.104Z] 07:33:03.599 INFO  Load global settings
+[2026-11-05T07:33:04.104Z] 07:33:03.852 INFO  Load global settings (done) | time=251ms
+[2026-11-05T07:33:04.104Z] 07:33:03.857 INFO  Server id: 303924D4-AaGmsJnd_gULJHt0cVyO
+[2026-11-05T07:33:04.104Z] 07:33:03.881 INFO  Loading required plugins
+[2026-11-05T07:33:04.104Z] 07:33:03.885 INFO  Load plugins index
+[2026-11-05T07:33:04.104Z] 07:33:03.935 INFO  Load plugins index (done) | time=49ms
+[2026-11-05T07:33:04.104Z] 07:33:03.935 INFO  Load/download plugins
+[2026-11-05T07:33:04.769Z] WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+[2026-11-05T07:33:04.769Z] 
+[2026-11-05T07:33:04.769Z] [notice] A new release of pip is available: 26.2.2 -> 26.3
+[2026-11-05T07:33:04.769Z] [notice] To update, run: pip install --upgrade pip
+[2026-11-05T07:33:04.769Z] [dependency-check.sh] Running Dependency-Check (fail on CVSS >= 7)
+[2026-11-05T07:33:05.015Z] 07:33:04.702 INFO  Load/download plugins (done) | time=771ms
+[2026-11-05T07:33:05.926Z] 07:33:05.882 INFO  Load project settings for component key: 'secure-cicd-ecs'
+[2026-11-05T07:33:06.177Z] 07:33:05.955 INFO  Load project settings for component key: 'secure-cicd-ecs' (done) | time=78ms
+[2026-11-05T07:33:06.177Z] 07:33:06.015 INFO  Process project properties
+[2026-11-05T07:33:06.177Z] 07:33:06.045 INFO  Process project properties (done) | time=29ms
+[2026-11-05T07:33:06.177Z] 07:33:06.054 INFO  Project key: secure-cicd-ecs
+[2026-11-05T07:33:06.177Z] 07:33:06.057 INFO  Base dir: /usr/src
+[2026-11-05T07:33:06.177Z] 07:33:06.065 INFO  Working dir: /tmp/.scannerwork
+[2026-11-05T07:33:06.728Z] 07:33:06.540 INFO  Load quality profiles
+[2026-11-05T07:33:06.728Z] 07:33:06.654 INFO  Load quality profiles (done) | time=134ms
+[2026-11-05T07:33:06.978Z] 07:33:06.792 INFO  Load active rules
+[2026-11-05T07:33:07.889Z] 07:33:07.589 INFO  Load active rules (done) | time=800ms
+[2026-11-05T07:33:07.889Z] 07:33:07.612 INFO  Load analysis cache
+[2026-11-05T07:33:07.889Z] 07:33:07.725 INFO  Load analysis cache | time=107ms
+[2026-11-05T07:33:08.140Z] 07:33:08.019 INFO  Preprocessing files...
+[2026-11-05T07:33:08.391Z] 07:33:08.250 INFO  2 languages detected in 7 preprocessed files (done) | time=241ms
+[2026-11-05T07:33:08.391Z] 07:33:08.253 INFO  7 files ignored because of inclusion/exclusion patterns
+[2026-11-05T07:33:08.391Z] 07:33:08.265 INFO  0 files ignored because of scm ignore settings
+[2026-11-05T07:33:08.391Z] 07:33:08.269 INFO  Loading plugins for detected languages
+[2026-11-05T07:33:08.391Z] 07:33:08.273 INFO  Load/download plugins
+[2026-11-05T07:33:08.641Z] 07:33:08.631 INFO  Load/download plugins (done) | time=361ms
+[2026-11-05T07:33:09.624Z] 07:33:09.439 INFO  Load project repositories
+[2026-11-05T07:33:09.884Z] 07:33:09.804 INFO  Load project repositories (done) | time=364ms
+[2026-11-05T07:33:10.136Z] 07:33:10.011 INFO  Indexing files...
+[2026-11-05T07:33:10.136Z] 07:33:10.026 INFO  Project configuration:
+[2026-11-05T07:33:10.136Z] 07:33:10.039 INFO    Excluded sources: app/test_*.py, **/__pycache__/**, app/test_*.py
+[2026-11-05T07:33:10.136Z] 07:33:10.039 INFO    Included tests: app/test_*.py
+[2026-11-05T07:33:10.136Z] 07:33:10.104 INFO  7 files indexed (done) | time=76ms
+[2026-11-05T07:33:10.136Z] 07:33:10.120 INFO  Quality profile for docker: Sonar way core
+[2026-11-05T07:33:10.136Z] 07:33:10.121 INFO  Quality profile for py: Sonar way core
+[2026-11-05T07:33:10.136Z] 07:33:10.121 INFO  ------------- Run sensors on module secure-cicd-ecs
+[2026-11-05T07:33:10.386Z] 07:33:10.266 INFO  Load metrics repository
+[2026-11-05T07:33:10.387Z] 07:33:10.382 INFO  Load metrics repository (done) | time=114ms
+[2026-11-05T07:33:12.794Z] [INFO] Checking for updates
+[2026-11-05T07:33:12.870Z] 07:33:12.337 INFO  Sensor IaC YAML File Type Classification Sensor [iac]
+[2026-11-05T07:33:12.870Z] 07:33:12.350 INFO  Sensor IaC YAML File Type Classification Sensor [iac] (done) | time=12ms
+[2026-11-05T07:33:12.870Z] 07:33:12.354 INFO  Sensor IaC hadolint report Sensor [iac]
+[2026-11-05T07:33:12.870Z] 07:33:12.355 INFO  Sensor IaC hadolint report Sensor [iac] (done) | time=0ms
+[2026-11-05T07:33:12.870Z] 07:33:12.356 INFO  Sensor Java Config Sensor [iac]
+[2026-11-05T07:33:12.870Z] 07:33:12.359 INFO  There are no files to be analyzed for the Java language
+[2026-11-05T07:33:12.870Z] 07:33:12.361 INFO  Sensor Java Config Sensor [iac] (done) | time=0ms
+[2026-11-05T07:33:12.870Z] 07:33:12.377 INFO  Sensor IaC Docker Sensor [iac]
+[2026-11-05T07:33:12.870Z] 07:33:12.629 INFO  1 source file to be analyzed
+[2026-11-05T07:33:13.120Z] 07:33:12.869 INFO  1/1 source file has been analyzed
+[2026-11-05T07:33:13.121Z] 07:33:12.872 INFO  Sensor IaC Docker Sensor [iac] (done) | time=522ms
+[2026-11-05T07:33:13.121Z] 07:33:12.879 INFO  Sensor Python Sensor [python]
+[2026-11-05T07:33:13.671Z] 07:33:13.658 INFO  Starting global symbols computation
+[2026-11-05T07:33:13.671Z] 07:33:13.664 INFO  3 source files to be analyzed
+[2026-11-05T07:33:14.582Z] 07:33:14.401 INFO  3/3 source files have been analyzed
+[2026-11-05T07:33:14.583Z] 07:33:14.405 INFO  Finished step global symbols computation in 745ms
+[2026-11-05T07:33:14.583Z] 07:33:14.449 INFO  Starting rules execution
+[2026-11-05T07:33:14.583Z] 07:33:14.451 INFO  3 source files to be analyzed
+[2026-11-05T07:33:15.926Z] 07:33:15.842 INFO  3/3 source files have been analyzed
+[2026-11-05T07:33:15.926Z] 07:33:15.844 INFO  Finished step rules execution in 1392ms
+[2026-11-05T07:33:15.926Z] 07:33:15.847 INFO  The Python analyzer was able to leverage cached data from previous analyses for 0 out of 3 files. These files were not parsed.
+[2026-11-05T07:33:15.926Z] 07:33:15.851 INFO  Sensor Python Sensor [python] (done) | time=2977ms
+[2026-11-05T07:33:15.926Z] 07:33:15.852 INFO  Sensor Cobertura Sensor for Python coverage [python]
+[2026-11-05T07:33:16.177Z] 07:33:15.955 INFO  Sensor Cobertura Sensor for Python coverage [python] (done) | time=103ms
+[2026-11-05T07:33:16.177Z] 07:33:15.957 INFO  Sensor PythonXUnitSensor [python]
+[2026-11-05T07:33:16.177Z] 07:33:16.000 INFO  Sensor PythonXUnitSensor [python] (done) | time=43ms
+[2026-11-05T07:33:16.177Z] 07:33:16.004 INFO  Sensor Python Dependency Sensor [python]
+[2026-11-05T07:33:16.177Z] 07:33:16.016 INFO  Sensor Python Dependency Sensor [python] (done) | time=14ms
+[2026-11-05T07:33:16.177Z] 07:33:16.023 INFO  Sensor TextAndSecretsSensor [text]
+[2026-11-05T07:33:16.177Z] 07:33:16.052 INFO  Available processors: 2
+[2026-11-05T07:33:16.177Z] 07:33:16.053 INFO  Using 2 threads for analysis.
+[2026-11-05T07:33:17.088Z] 07:33:16.874 INFO  Start fetching files for the text and secrets analysis
+[2026-11-05T07:33:17.088Z] 07:33:16.887 INFO  Using Git CLI to retrieve dirty files
+[2026-11-05T07:33:17.088Z] 07:33:16.894 WARN  Retrieving only language associated files, make sure to run the analysis inside a git repository to make use of inclusions specified via "sonar.text.inclusions"
+[2026-11-05T07:33:17.088Z] 07:33:16.895 INFO  Starting the text and secrets analysis
+[2026-11-05T07:33:17.088Z] 07:33:16.899 INFO  4 source files to be analyzed for the text and secrets analysis
+[2026-11-05T07:33:17.088Z] 07:33:16.937 INFO  4/4 source files have been analyzed for the text and secrets analysis
+[2026-11-05T07:33:17.088Z] 07:33:16.942 INFO  Sensor TextAndSecretsSensor [text] (done) | time=920ms
+[2026-11-05T07:33:17.088Z] 07:33:16.949 INFO  ------------- Run sensors on project
+[2026-11-05T07:33:17.339Z] 07:33:17.151 INFO  Sensor IaC Project Sensor [iac]
+[2026-11-05T07:33:17.339Z] 07:33:17.156 INFO  Sensor IaC Project Sensor [iac] (done) | time=2ms
+[2026-11-05T07:33:17.339Z] 07:33:17.158 INFO  Sensor Zero Coverage Sensor
+[2026-11-05T07:33:17.339Z] 07:33:17.170 INFO  Sensor Zero Coverage Sensor (done) | time=13ms
+[2026-11-05T07:33:17.339Z] 07:33:17.170 INFO  ------------- Gather SCA dependencies on project
+[2026-11-05T07:33:17.339Z] 07:33:17.183 INFO  Dependency analysis skipped
+[2026-11-05T07:33:17.339Z] 07:33:17.201 INFO  CPD Executor Calculating CPD for 2 files
+[2026-11-05T07:33:17.339Z] 07:33:17.210 INFO  CPD Executor CPD calculation finished (done) | time=8ms
+[2026-11-05T07:33:17.339Z] 07:33:17.224 INFO  SCM revision ID '91a522bd1802aedbf7d8f3b05dd25646b04e3074'
+[2026-11-05T07:33:17.589Z] 07:33:17.387 INFO  Analysis report generated in 168ms, dir size=181.7 kB
+[2026-11-05T07:33:17.589Z] 07:33:17.428 INFO  Analysis report compressed in 38ms, zip size=37.9 kB
+[2026-11-05T07:33:17.589Z] 07:33:17.478 INFO  Analysis report uploaded in 50ms
+[2026-11-05T07:33:17.589Z] 07:33:17.498 INFO  ------------- Check Quality Gate status
+[2026-11-05T07:33:17.589Z] 07:33:17.499 INFO  Waiting for the analysis report to be processed (max 300s)
+[2026-11-05T07:33:22.785Z] 07:33:22.603 INFO  QUALITY GATE STATUS: PASSED - View details on http://localhost:9000/dashboard?id=secure-cicd-ecs
+[2026-11-05T07:33:22.785Z] 07:33:22.637 INFO  Analysis total time: 22.602 s
+[2026-11-05T07:33:22.785Z] 07:33:22.642 INFO  SonarScanner Engine completed successfully
+[2026-11-05T07:33:22.785Z] 07:33:22.691 INFO  EXECUTION SUCCESS
+[2026-11-05T07:33:22.785Z] 07:33:22.693 INFO  Total time: 31.439s
+[2026-11-05T07:33:23.697Z] [sonar-scan.sh] Quality Gate passed
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[2026-11-05T07:33:39.196Z] [INFO] NVD API has 2,041 records in this update
+[2026-11-05T07:33:39.196Z] [INFO] Downloaded 2,041/2,041 (100%)
+[2026-11-05T07:33:41.679Z] [INFO] Completed processing batch 1/2 (50%) in 3,967ms
+[2026-11-05T07:33:41.679Z] [INFO] Completed processing batch 2/2 (100%) in 150ms
+[2026-11-05T07:33:41.680Z] [INFO] Should skip RetireJSDataSource update since last update was within period PT24H.
+[2026-11-05T07:33:41.680Z] [INFO] Skipping Known Exploited Vulnerabilities update check since last check was within 24 hours.
+[2026-11-05T07:33:41.680Z] [INFO] Begin database defrag
+[2026-11-05T07:33:51.556Z] [INFO] End database defrag (8676 ms)
+[2026-11-05T07:33:51.556Z] [INFO] Check for updates complete (38727 ms)
+[2026-11-05T07:33:51.556Z] [INFO] 
+[2026-11-05T07:33:51.556Z] 
+[2026-11-05T07:33:51.556Z] Dependency-Check is an open source tool performing a best effort analysis of 3rd party dependencies; false positives and false negatives may exist in the analysis performed by the tool. Use of the tool and the reporting provided constitutes acceptance for use in an AS IS condition, and there are NO warranties, implied or otherwise, with regard to the analysis or its use. Any use of the tool and the reporting provided is at the user's risk. In no event shall the copyright holder or OWASP be held liable for any damages whatsoever arising out of or in connection with the use of this tool, the analysis performed, or the resulting report.
+[2026-11-05T07:33:51.556Z] 
+[2026-11-05T07:33:51.556Z] 
+[2026-11-05T07:33:51.556Z]    About ODC: https://dependency-check.github.io/DependencyCheck/general/internals.html
+[2026-11-05T07:33:51.556Z]    False Positives: https://dependency-check.github.io/DependencyCheck/general/suppression.html
+[2026-11-05T07:33:51.556Z] 
+[2026-11-05T07:33:51.556Z] 
+[2026-11-05T07:33:51.556Z] [INFO] Analysis Started
+[2026-11-05T07:33:51.556Z] [INFO] Finished File Name Analyzer (0 seconds)
+[2026-11-05T07:33:51.556Z] [INFO] Finished Dependency Merging Analyzer (0 seconds)
+[2026-11-05T07:33:51.556Z] [INFO] Finished Hint Analyzer (0 seconds)
+[2026-11-05T07:33:54.806Z] [INFO] Created CPE Index (3 seconds)
+[2026-11-05T07:33:54.806Z] [INFO] Finished CPE Analyzer (4 seconds)
+[2026-11-05T07:33:54.806Z] [INFO] Finished False Positive Analyzer (0 seconds)
+[2026-11-05T07:33:54.806Z] [INFO] Finished NVD CVE Analyzer (0 seconds)
+[2026-11-05T07:33:55.357Z] [INFO] Finished RetireJS Analyzer (0 seconds)
+[2026-11-05T07:33:55.357Z] [WARN] Sonatype OSS Index Analyzer disabled due to missing credentials. Authentication with token is now required, and OSS Index is migrating to Sonatype Guide. See https://dependency-check.github.io/DependencyCheck/analyzers/oss-index-analyzer.html for more information on authentication with Sonatype Guide OSS Index.
+[2026-11-05T07:33:55.357Z] [INFO] Finished Vulnerability Suppression Analyzer (0 seconds)
+[2026-11-05T07:33:55.357Z] [INFO] Finished Known Exploited Vulnerability Analyzer (0 seconds)
+[2026-11-05T07:33:55.357Z] [INFO] Finished Dependency Bundling Analyzer (0 seconds)
+[2026-11-05T07:33:55.357Z] [INFO] Finished Unused Suppression Rule Analyzer (0 seconds)
+[2026-11-05T07:33:55.357Z] [INFO] Analysis Complete (4 seconds)
+[2026-11-05T07:33:55.357Z] [INFO] Writing HTML report to: /src/reports/dependency-check/dependency-check-report.html
+[2026-11-05T07:33:55.908Z] [INFO] Writing JSON report to: /src/reports/dependency-check/dependency-check-report.json
+[2026-11-05T07:33:55.908Z] [INFO] Writing SARIF report to: /src/reports/dependency-check/dependency-check-report.sarif
+[2026-11-05T07:33:56.164Z] [dependency-check.sh] SCA gate passed
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // parallel
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Image)
+[Pipeline] dir
+[2026-11-05T07:33:56.367Z] Running in /var/jenkins_home/jobs/secure-cicd-ecs/branches/main/workspace/app
+[Pipeline] {
+[Pipeline] sh
+[2026-11-05T07:33:56.659Z] + docker build --target production --build-arg APP_VERSION=3-91a522b -t secure-cicd-app:3-91a522b .
+[2026-11-05T07:33:56.659Z] DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+[2026-11-05T07:33:56.659Z]             Install the buildx component to build images with BuildKit:
+[2026-11-05T07:33:56.659Z]             https://docs.docker.com/go/buildx/
+[2026-11-05T07:33:56.659Z] 
+[2026-11-05T07:33:56.659Z] Sending build context to Docker daemon  18.43kB[2026-11-05T07:33:56.659Z] 
+[2026-11-05T07:33:56.659Z] Step 1/19 : FROM python:3.13-slim AS base
+[2026-11-05T07:33:56.659Z]  ---> bdfc738a8a86
+[2026-11-05T07:33:56.659Z] Step 2/19 : ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1
+[2026-11-05T07:33:56.659Z]  ---> Using cache
+[2026-11-05T07:33:56.659Z]  ---> 97d29ab72749
+[2026-11-05T07:33:56.659Z] Step 3/19 : WORKDIR /usr/src/app
+[2026-11-05T07:33:56.659Z]  ---> Using cache
+[2026-11-05T07:33:56.659Z]  ---> 3687ea1fba1f
+[2026-11-05T07:33:56.659Z] Step 4/19 : RUN apt-get update  && apt-get -y --no-install-recommends upgrade  && rm -rf /var/lib/apt/lists/*
+[2026-11-05T07:33:56.659Z]  ---> Using cache
+[2026-11-05T07:33:56.659Z]  ---> c00eee1cc59d
+[2026-11-05T07:33:56.659Z] Step 5/19 : COPY requirements.txt ./
+[2026-11-05T07:33:56.659Z]  ---> Using cache
+[2026-11-05T07:33:56.659Z]  ---> 5f41a2a98f46
+[2026-11-05T07:33:56.659Z] Step 6/19 : RUN pip install -r requirements.txt
+[2026-11-05T07:33:56.659Z]  ---> Using cache
+[2026-11-05T07:33:56.659Z]  ---> ff38e810605e
+[2026-11-05T07:33:56.659Z] Step 7/19 : COPY app.py instrumentation.py ./
+[2026-11-05T07:33:56.659Z]  ---> Using cache
+[2026-11-05T07:33:56.659Z]  ---> 0bc4deab73a3
+[2026-11-05T07:33:56.659Z] Step 8/19 : FROM base AS test
+[2026-11-05T07:33:56.659Z]  ---> 0bc4deab73a3
+[2026-11-05T07:33:56.659Z] Step 9/19 : COPY requirements-dev.txt test_app.py ./
+[2026-11-05T07:33:56.659Z]  ---> Using cache
+[2026-11-05T07:33:56.659Z]  ---> 8c961f84e475
+[2026-11-05T07:33:56.659Z] Step 10/19 : RUN pip install -r requirements-dev.txt && pytest -q test_app.py
+[2026-11-05T07:33:56.659Z]  ---> Using cache
+[2026-11-05T07:33:56.659Z]  ---> 98dab1a1be02
+[2026-11-05T07:33:56.659Z] Step 11/19 : FROM base AS production
+[2026-11-05T07:33:56.659Z]  ---> 0bc4deab73a3
+[2026-11-05T07:33:56.659Z] Step 12/19 : ARG APP_VERSION=dev
+[2026-11-05T07:33:56.659Z]  ---> Running in c0de42b897df
+[2026-11-05T07:33:56.659Z]  ---> Removed intermediate container c0de42b897df
+[2026-11-05T07:33:56.659Z]  ---> 314f8da27c03
+[2026-11-05T07:33:56.659Z] Step 13/19 : ENV APP_VERSION=${APP_VERSION} PORT=8080
+[2026-11-05T07:33:56.659Z]  ---> Running in 56b95823cf3a
+[2026-11-05T07:33:56.659Z]  ---> Removed intermediate container 56b95823cf3a
+[2026-11-05T07:33:56.659Z]  ---> 9210b25ba3a4
+[2026-11-05T07:33:56.659Z] Step 14/19 : RUN pip uninstall -y pip setuptools wheel 2>/dev/null || true
+[2026-11-05T07:33:56.659Z]  ---> Running in 9dfeb181fd49
+[2026-11-05T07:33:58.525Z] Found existing installation: pip 26.2.2
+[2026-11-05T07:33:58.525Z] Uninstalling pip-26.2.2:
+[2026-11-05T07:33:58.525Z]   Successfully uninstalled pip-26.2.2
+[2026-11-05T07:33:58.776Z]  ---> Removed intermediate container 9dfeb181fd49
+[2026-11-05T07:33:58.776Z]  ---> d14c3fd87943
+[2026-11-05T07:33:58.776Z] Step 15/19 : RUN useradd --system --uid 10001 --no-create-home appuser
+[2026-11-05T07:33:58.776Z]  ---> Running in 3c9d291c6719
+[2026-11-05T07:33:59.026Z] [91museradd warning: appuser's uid 10001 is greater than SYS_UID_MAX 999
+[2026-11-05T07:33:59.277Z] [0m ---> Removed intermediate container 3c9d291c6719
+[2026-11-05T07:33:59.277Z]  ---> 6d44fb3dd47e
+[2026-11-05T07:33:59.277Z] Step 16/19 : USER 10001
+[2026-11-05T07:33:59.277Z]  ---> Running in 259456cd6a9a
+[2026-11-05T07:33:59.277Z]  ---> Removed intermediate container 259456cd6a9a
+[2026-11-05T07:33:59.277Z]  ---> f8f74b740c20
+[2026-11-05T07:33:59.277Z] Step 17/19 : EXPOSE 8080
+[2026-11-05T07:33:59.277Z]  ---> Running in f00b4698aa5e
+[2026-11-05T07:33:59.277Z]  ---> Removed intermediate container f00b4698aa5e
+[2026-11-05T07:33:59.277Z]  ---> adba1b420ac5
+[2026-11-05T07:33:59.277Z] Step 18/19 : HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3   CMD python -c "import urllib.request,os;urllib.request.urlopen('http://127.0.0.1:%s/health'%os.environ.get('PORT','8080'),timeout=2)" || exit 1
+[2026-11-05T07:33:59.527Z]  ---> Running in 4b77c4bcd4bb
+[2026-11-05T07:33:59.527Z]  ---> Removed intermediate container 4b77c4bcd4bb
+[2026-11-05T07:33:59.527Z]  ---> f3600fe29352
+[2026-11-05T07:33:59.527Z] Step 19/19 : CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "2", "--worker-tmp-dir", "/dev/shm", "--access-logfile", "-", "app:app"]
+[2026-11-05T07:33:59.527Z]  ---> Running in df8569ea207d
+[2026-11-05T07:33:59.527Z]  ---> Removed intermediate container df8569ea207d
+[2026-11-05T07:33:59.527Z]  ---> 4d06876da48e
+[2026-11-05T07:33:59.527Z] Successfully built 4d06876da48e
+[2026-11-05T07:33:59.527Z] Successfully tagged secure-cicd-app:3-91a522b
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Security Scans (image))
+[Pipeline] parallel
+[Pipeline] { (Branch: Image Scan - Trivy)
+[Pipeline] { (Branch: SBOM - Syft)
+[Pipeline] stage
+[Pipeline] { (Image Scan - Trivy)
+[Pipeline] stage
+[Pipeline] { (SBOM - Syft)
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
+[Pipeline] sh
+[2026-11-05T07:34:00.140Z] + scripts/sbom.sh secure-cicd-app:3-91a522b
+[2026-11-05T07:34:00.141Z] [sbom.sh] Syft: generating SBOMs for secure-cicd-app:3-91a522b
+[2026-11-05T07:34:00.204Z] + scripts/trivy-scan.sh secure-cicd-app:3-91a522b
+[2026-11-05T07:34:00.204Z] [trivy-scan.sh] Trivy: writing JSON report for secure-cicd-app:3-91a522b
+[2026-11-05T07:34:00.758Z] 2026-11-05T07:34:00Z	INFO	[vulndb] Need to update DB
+[2026-11-05T07:34:00.758Z] 2026-11-05T07:34:00Z	INFO	[vulndb] Downloading vulnerability DB...
+[2026-11-05T07:34:00.758Z] 2026-11-05T07:34:00Z	INFO	[vulndb] Downloading artifact...	repo="mirror.gcr.io/aquasec/trivy-db:2"
+[2026-11-05T07:34:15.336Z] 14.91 MiB / 132.22 MiB [------>_____________________________________________________] 11.27% ? p/s ?34.97 MiB / 132.22 MiB [--------------->____________________________________________] 26.45% ? p/s ?57.25 MiB / 132.22 MiB [------------------------->__________________________________] 43.30% ? p/s ?75.56 MiB / 132.22 MiB [-------------------------->___________________] 57.15% 100.95 MiB p/s ETA 0s94.47 MiB / 132.22 MiB [-------------------------------->_____________] 71.45% 100.95 MiB p/s ETA 0s113.50 MiB / 132.22 MiB [-------------------------------------->______] 85.84% 100.95 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [------------------------------------------->] 100.00% 100.53 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [------------------------------------------->] 100.00% 100.53 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [------------------------------------------->] 100.00% 100.53 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 94.04 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 94.04 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 94.04 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 87.97 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 87.97 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 87.97 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 82.30 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 82.30 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 82.30 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 76.99 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 76.99 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 76.99 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 72.02 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 72.02 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 72.02 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 67.37 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 67.37 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 67.37 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 63.03 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 63.03 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 63.03 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 58.96 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 58.96 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 58.96 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 55.16 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 55.16 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 55.16 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 51.60 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 51.60 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 51.60 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 48.27 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 48.27 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 48.27 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 45.16 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 45.16 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 45.16 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 42.24 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 42.24 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 42.24 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 39.52 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 39.52 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 39.52 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 36.97 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 36.97 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 36.97 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 34.58 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 34.58 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 34.58 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 32.35 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 32.35 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 32.35 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 30.26 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 30.26 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 30.26 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 28.31 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 28.31 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 28.31 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 26.49 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 26.49 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 26.49 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------->] 100.00% 24.78 MiB p/s ETA 0s132.22 MiB / 132.22 MiB [-------------------------------------------------] 100.00% 9.52 MiB p/s 14s2026-11-05T07:34:15Z	INFO	[vulndb] Artifact successfully downloaded	repo="mirror.gcr.io/aquasec/trivy-db:2"
+[2026-11-05T07:34:15.337Z] 2026-11-05T07:34:15Z	INFO	[vuln] Vulnerability scanning is enabled
+[2026-11-05T07:34:15.337Z] 2026-11-05T07:34:15Z	INFO	[secret] Secret scanning is enabled
+[2026-11-05T07:34:15.337Z] 2026-11-05T07:34:15Z	INFO	[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning
+[2026-11-05T07:34:15.337Z] 2026-11-05T07:34:15Z	INFO	[secret] Please see https://trivy.dev/docs/v0.76/guide/scanner/secret#recommendation for faster secret detection
+[2026-11-05T07:34:19.459Z] 2026-11-05T07:34:18Z	INFO	[python] Licenses acquired from one or more METADATA files may be subject to additional terms. Use `--debug` flag to see all affected packages.
+[2026-11-05T07:34:19.459Z] 2026-11-05T07:34:18Z	INFO	Detected OS	family="debian" version="13.7"
+[2026-11-05T07:34:19.459Z] 2026-11-05T07:34:18Z	INFO	[debian] Detecting vulnerabilities...	os_version="13" pkg_num=87
+[2026-11-05T07:34:19.459Z] 2026-11-05T07:34:18Z	INFO	Number of language-specific files	num=1
+[2026-11-05T07:34:19.459Z] 2026-11-05T07:34:18Z	INFO	[python-pkg] Detecting vulnerabilities...
+[2026-11-05T07:34:19.459Z] 2026-11-05T07:34:18Z	WARN	Using severities from other vendors for some vulnerabilities. Read https://trivy.dev/docs/v0.76/guide/scanner/vulnerability#severity-selection for details.
+[2026-11-05T07:34:21.942Z] [trivy-scan.sh] Trivy: gating on HIGH,CRITICAL (fixed vulnerabilities only)
+[2026-11-05T07:34:22.493Z] 2026-11-05T07:34:22Z	INFO	[vuln] Vulnerability scanning is enabled
+[2026-11-05T07:34:22.493Z] 2026-11-05T07:34:22Z	INFO	[secret] Secret scanning is enabled
+[2026-11-05T07:34:22.493Z] 2026-11-05T07:34:22Z	INFO	[secret] If your scanning is slow, please try '--scanners vuln' to disable secret scanning
+[2026-11-05T07:34:22.493Z] 2026-11-05T07:34:22Z	INFO	[secret] Please see https://trivy.dev/docs/v0.76/guide/scanner/secret#recommendation for faster secret detection
+[2026-11-05T07:34:24.355Z] 2026-11-05T07:34:24Z	INFO	Detected OS	family="debian" version="13.7"
+[2026-11-05T07:34:24.355Z] 2026-11-05T07:34:24Z	INFO	[debian] Detecting vulnerabilities...	os_version="13" pkg_num=87
+[2026-11-05T07:34:24.355Z] 2026-11-05T07:34:24Z	INFO	Number of language-specific files	num=1
+[2026-11-05T07:34:24.355Z] 2026-11-05T07:34:24Z	INFO	[python-pkg] Detecting vulnerabilities...
+[2026-11-05T07:34:24.355Z] 2026-11-05T07:34:24Z	WARN	Using severities from other vendors for some vulnerabilities. Read https://trivy.dev/docs/v0.76/guide/scanner/vulnerability#severity-selection for details.
+[2026-11-05T07:34:24.355Z] 
+[2026-11-05T07:34:24.355Z] Report Summary
+[2026-11-05T07:34:24.355Z] 
+[2026-11-05T07:34:24.355Z] ┌──────────────────────────────────────────────────────────────────────────────────┬────────────┬─────────────────┬─────────┐
+[2026-11-05T07:34:24.355Z] │                                      Target                                      │    Type    │ Vulnerabilities │ Secrets │
+[2026-11-05T07:34:24.355Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.355Z] │ secure-cicd-app:3-91a522b (debian 13.7)                                          │   debian   │        0        │    -    │
+[2026-11-05T07:34:24.355Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.355Z] │ usr/local/lib/python3.13/site-packages/blinker-1.9.0.dist-info/METADATA          │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.355Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.355Z] │ usr/local/lib/python3.13/site-packages/certifi-2026.10.23.dist-info/METADATA     │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.355Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.356Z] │ usr/local/lib/python3.13/site-packages/charset_normalizer-3.5.2.dist-info/METAD- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.356Z] │ ATA                                                                              │            │                 │         │
+[2026-11-05T07:34:24.356Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.356Z] │ usr/local/lib/python3.13/site-packages/click-8.5.0.dist-info/METADATA            │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.356Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.356Z] │ usr/local/lib/python3.13/site-packages/flask-3.1.3.dist-info/METADATA            │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.356Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.356Z] │ usr/local/lib/python3.13/site-packages/googleapis_common_protos-1.76.0.dist-inf- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.356Z] │ o/METADATA                                                                       │            │                 │         │
+[2026-11-05T07:34:24.356Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.356Z] │ usr/local/lib/python3.13/site-packages/grpcio-1.85.0.dist-info/METADATA          │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.356Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.356Z] │ usr/local/lib/python3.13/site-packages/gunicorn-26.2.0.dist-info/METADATA        │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.356Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.356Z] │ usr/local/lib/python3.13/site-packages/idna-3.20.dist-info/METADATA              │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.356Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.356Z] │ usr/local/lib/python3.13/site-packages/itsdangerous-2.2.0.dist-info/METADATA     │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.356Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.356Z] │ usr/local/lib/python3.13/site-packages/jinja2-3.1.6.dist-info/METADATA           │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.357Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.357Z] │ usr/local/lib/python3.13/site-packages/markupsafe-3.0.4.dist-info/METADATA       │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.357Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.357Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_api-1.45.2.dist-info/METAD- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.357Z] │ ATA                                                                              │            │                 │         │
+[2026-11-05T07:34:24.357Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.357Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_exporter_http_transport-0.- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.357Z] │ 66b2.dist-info/METADATA                                                          │            │                 │         │
+[2026-11-05T07:34:24.357Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.357Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_exporter_otlp-1.45.2.dist-- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.357Z] │ info/METADATA                                                                    │            │                 │         │
+[2026-11-05T07:34:24.357Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.357Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_exporter_otlp_common-0.66b- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.357Z] │ 2.dist-info/METADATA                                                             │            │                 │         │
+[2026-11-05T07:34:24.357Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.357Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_exporter_otlp_proto_common- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.357Z] │ -1.45.2.dist-info/METADATA                                                       │            │                 │         │
+[2026-11-05T07:34:24.357Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.357Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_exporter_otlp_proto_grpc-1- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.357Z] │ .45.2.dist-info/METADATA                                                         │            │                 │         │
+[2026-11-05T07:34:24.358Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.358Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_exporter_otlp_proto_http-1- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.358Z] │ .45.2.dist-info/METADATA                                                         │            │                 │         │
+[2026-11-05T07:34:24.358Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.358Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_instrumentation-0.66b2.dis- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.358Z] │ t-info/METADATA                                                                  │            │                 │         │
+[2026-11-05T07:34:24.358Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.358Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_instrumentation_flask-0.66- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.358Z] │ b2.dist-info/METADATA                                                            │            │                 │         │
+[2026-11-05T07:34:24.358Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.358Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_instrumentation_requests-0- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.358Z] │ .66b2.dist-info/METADATA                                                         │            │                 │         │
+[2026-11-05T07:34:24.358Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.358Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_instrumentation_wsgi-0.66b- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.358Z] │ 2.dist-info/METADATA                                                             │            │                 │         │
+[2026-11-05T07:34:24.358Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.358Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_proto-1.45.2.dist-info/MET- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.358Z] │ ADATA                                                                            │            │                 │         │
+[2026-11-05T07:34:24.358Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.358Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_sdk-1.45.2.dist-info/METAD- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.358Z] │ ATA                                                                              │            │                 │         │
+[2026-11-05T07:34:24.359Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.359Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_semantic_conventions-0.66b- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.359Z] │ 2.dist-info/METADATA                                                             │            │                 │         │
+[2026-11-05T07:34:24.359Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.359Z] │ usr/local/lib/python3.13/site-packages/opentelemetry_util_http-0.66b2.dist-info- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.359Z] │ /METADATA                                                                        │            │                 │         │
+[2026-11-05T07:34:24.359Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.359Z] │ usr/local/lib/python3.13/site-packages/packaging-26.3.dist-info/METADATA         │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.359Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.359Z] │ usr/local/lib/python3.13/site-packages/prometheus_client-0.26.0.dist-info/METAD- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.359Z] │ ATA                                                                              │            │                 │         │
+[2026-11-05T07:34:24.359Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.359Z] │ usr/local/lib/python3.13/site-packages/protobuf-7.36.2.dist-info/METADATA        │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.359Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.359Z] │ usr/local/lib/python3.13/site-packages/requests-2.34.2.dist-info/METADATA        │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.359Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.359Z] │ usr/local/lib/python3.13/site-packages/typing_extensions-4.16.0.dist-info/METAD- │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.359Z] │ ATA                                                                              │            │                 │         │
+[2026-11-05T07:34:24.359Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.359Z] │ usr/local/lib/python3.13/site-packages/urllib3-2.8.0.dist-info/METADATA          │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.360Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.360Z] │ usr/local/lib/python3.13/site-packages/werkzeug-3.1.9.dist-info/METADATA         │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.360Z] ├──────────────────────────────────────────────────────────────────────────────────┼────────────┼─────────────────┼─────────┤
+[2026-11-05T07:34:24.360Z] │ usr/local/lib/python3.13/site-packages/wrapt-2.5.2.dist-info/METADATA            │ python-pkg │        0        │    -    │
+[2026-11-05T07:34:24.360Z] └──────────────────────────────────────────────────────────────────────────────────┴────────────┴─────────────────┴─────────┘
+[2026-11-05T07:34:24.360Z] Legend:
+[2026-11-05T07:34:24.360Z] - '-': Not scanned
+[2026-11-05T07:34:24.360Z] - '0': Clean (no security findings detected)
+[2026-11-05T07:34:24.360Z] 
+[2026-11-05T07:34:24.612Z] [trivy-scan.sh] Image scan passed
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[2026-11-05T07:34:26.544Z] [sbom.sh] SBOM written: sbom/sbom.cdx.json (2853 components)
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // parallel
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Security Gate)
+[Pipeline] sh
+[2026-11-05T07:34:27.032Z] + scripts/summarize-findings.sh
+[2026-11-05T07:34:27.032Z] # Security scan summary
+[2026-11-05T07:34:27.032Z] 
+[2026-11-05T07:34:27.032Z] Build: http://54.216.98.36:8080/job/secure-cicd-ecs/job/main/3/  |  Image tag: 3-91a522b  |  Commit: 91a522bd1802aedbf7d8f3b05dd25646b04e3074
+[2026-11-05T07:34:27.032Z] 
+[2026-11-05T07:34:27.032Z] | Control | Tool | Result |
+[2026-11-05T07:34:27.032Z] | --- | --- | --- |
+[2026-11-05T07:34:27.032Z] | Secret scan | Gitleaks | 0 finding(s) |
+[2026-11-05T07:34:27.032Z] | SAST | SonarQube | Quality Gate: OK |
+[2026-11-05T07:34:27.032Z] | SCA | OWASP Dependency-Check | CRITICAL=0 HIGH=0 |
+[2026-11-05T07:34:27.032Z] | Image scan | Trivy | CRITICAL=0 HIGH=0 |
+[2026-11-05T07:34:27.032Z] | SBOM | Syft (CycloneDX) | 2853 components |
+[Pipeline] echo
+[2026-11-05T07:34:27.053Z] Security gate passed: no Critical/High findings and no secrets.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push to ECR)
+[Pipeline] sh
+[2026-11-05T07:34:27.427Z] + scripts/ecr-push.sh secure-cicd-app:3-91a522b
+[2026-11-05T07:34:28.338Z] WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+[2026-11-05T07:34:28.338Z] Configure a credential helper to remove this warning. See
+[2026-11-05T07:34:28.338Z] https://docs.docker.com/engine/reference/commandline/login/#credential-stores
+[2026-11-05T07:34:28.338Z] 
+[2026-11-05T07:34:28.338Z] The push refers to repository [****.dkr.ecr.eu-west-1.amazonaws.com/secure-cicd-app]
+[2026-11-05T07:34:28.338Z] fe24dd27ce1e: Preparing
+[2026-11-05T07:34:28.338Z] 6c0c72dd5cd1: Preparing
+[2026-11-05T07:34:28.338Z] c9bc932528c6: Preparing
+[2026-11-05T07:34:28.338Z] d01a159d5a88: Preparing
+[2026-11-05T07:34:28.338Z] ca78e3b888d9: Preparing
+[2026-11-05T07:34:28.338Z] 5d961bede4db: Preparing
+[2026-11-05T07:34:28.338Z] 1bc91069b895: Preparing
+[2026-11-05T07:34:28.338Z] 3929d22d8aa4: Preparing
+[2026-11-05T07:34:28.338Z] 1217eb836a36: Preparing
+[2026-11-05T07:34:28.338Z] b9baa14e993c: Preparing
+[2026-11-05T07:34:28.338Z] a5d6d345f6af: Preparing
+[2026-11-05T07:34:28.338Z] 5d961bede4db: Waiting
+[2026-11-05T07:34:28.338Z] 1bc91069b895: Waiting
+[2026-11-05T07:34:28.338Z] 3929d22d8aa4: Waiting
+[2026-11-05T07:34:28.338Z] 1217eb836a36: Waiting
+[2026-11-05T07:34:28.338Z] b9baa14e993c: Waiting
+[2026-11-05T07:34:28.338Z] a5d6d345f6af: Waiting
+[2026-11-05T07:34:28.589Z] fe24dd27ce1e: Pushed
+[2026-11-05T07:34:28.589Z] c9bc932528c6: Pushed
+[2026-11-05T07:34:28.589Z] 6c0c72dd5cd1: Pushed
+[2026-11-05T07:34:28.589Z] ca78e3b888d9: Pushed
+[2026-11-05T07:34:29.932Z] 1bc91069b895: Pushed
+[2026-11-05T07:34:29.932Z] 3929d22d8aa4: Pushed
+[2026-11-05T07:34:30.484Z] 5d961bede4db: Pushed
+[2026-11-05T07:34:31.828Z] d01a159d5a88: Pushed
+[2026-11-05T07:34:32.078Z] b9baa14e993c: Pushed
+[2026-11-05T07:34:32.629Z] 1217eb836a36: Pushed
+[2026-11-05T07:34:35.857Z] a5d6d345f6af: Pushed
+[2026-11-05T07:34:36.107Z] 3-91a522b: digest: sha256:64b5e1360d43824d3d481f60e5317437997fce9ada68347ad879521df87e311b size: 2620
+[2026-11-05T07:34:37.019Z] [ecr-push.sh] Pushed ****.dkr.ecr.eu-west-1.amazonaws.com/secure-cicd-app:3-91a522b (sha256:64b5e1360d43824d3d481f60e5317437997fce9ada68347ad879521df87e311b)
+[Pipeline] readFile
+[Pipeline] echo
+[2026-11-05T07:34:37.087Z] Warning: A secret was passed to "echo" using Groovy String interpolation, which is insecure.
+[2026-11-05T07:34:37.087Z] 		 Affected argument(s) used the following variable(s): [AWS_ACCOUNT_ID]
+[2026-11-05T07:34:37.087Z] 		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
+[2026-11-05T07:34:37.087Z] ecrPushImage: ****.dkr.ecr.eu-west-1.amazonaws.com/secure-cicd-app:3-91a522b@sha256:64b5e1360d43824d3d481f60e5317437997fce9ada68347ad879521df87e311b
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Render Task Definition)
+[Pipeline] sh
+[2026-11-05T07:34:37.503Z] + scripts/ecs-render-taskdef.sh
+[2026-11-05T07:34:37.503Z] [ecs-render-taskdef.sh] Rendered ecs/rendered/taskdef-3-91a522b.json
+[2026-11-05T07:34:37.503Z] {
+[2026-11-05T07:34:37.503Z]   "family": "secure-cicd-app",
+[2026-11-05T07:34:37.503Z]   "image": "****.dkr.ecr.eu-west-1.amazonaws.com/secure-cicd-app:3-91a522b@sha256:64b5e1360d43824d3d481f60e5317437997fce9ada68347ad879521df87e311b",
+[2026-11-05T07:34:37.503Z]   "cpu": "256",
+[2026-11-05T07:34:37.503Z]   "memory": "512"
+[2026-11-05T07:34:37.503Z] }
+[Pipeline] readFile
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to ECS)
+[Pipeline] sh
+[2026-11-05T07:34:37.980Z] + scripts/ecs-deploy.sh register ecs/rendered/taskdef-3-91a522b.json
+[2026-11-05T07:34:39.841Z] [ecs-deploy.sh] Registered arn:aws:ecs:eu-west-1:****:task-definition/secure-cicd-app:2
+[2026-11-05T07:34:39.841Z] arn:aws:ecs:eu-west-1:****:task-definition/secure-cicd-app:2
+[Pipeline] readFile
+[Pipeline] sh
+[2026-11-05T07:34:39.896Z] Warning: A secret was passed to "sh" using Groovy String interpolation, which is insecure.
+[2026-11-05T07:34:39.896Z] 		 Affected argument(s) used the following variable(s): [AWS_ACCOUNT_ID]
+[2026-11-05T07:34:39.896Z] 		 See https://jenkins.io/redirect/groovy-string-interpolation for details.
+[2026-11-05T07:34:40.150Z] + scripts/ecs-deploy.sh update arn:aws:ecs:eu-west-1:****:task-definition/secure-cicd-app:2
+[2026-11-05T07:34:41.065Z] [ecs-deploy.sh] Previous revision: arn:aws:ecs:eu-west-1:****:task-definition/secure-cicd-app:1
+[2026-11-05T07:34:42.408Z] ---------------------------------------------------------------------------------------------------------------
+[2026-11-05T07:34:42.408Z] |                                                UpdateService                                                |
+[2026-11-05T07:34:42.408Z] +---------+--------------+----------+-------------------------------------------------------------------------+
+[2026-11-05T07:34:42.408Z] | desired |    state     | status   |                                   td                                    |
+[2026-11-05T07:34:42.408Z] +---------+--------------+----------+-------------------------------------------------------------------------+
+[2026-11-05T07:34:42.408Z] |  0      |  IN_PROGRESS |  PRIMARY |  arn:aws:ecs:eu-west-1:****:task-definition/secure-cicd-app:2   |
+[2026-11-05T07:34:42.408Z] |  0      |  COMPLETED   |  ACTIVE  |  arn:aws:ecs:eu-west-1:****:task-definition/secure-cicd-app:1   |
+[2026-11-05T07:34:42.408Z] +---------+--------------+----------+-------------------------------------------------------------------------+
+[Pipeline] sh
+[2026-11-05T07:34:42.683Z] + scripts/ecs-deploy.sh wait
+[2026-11-05T07:34:42.683Z] [ecs-deploy.sh] Waiting for the rolling deployment (circuit breaker will roll back on failure)
+[2026-11-05T07:34:43.602Z] [ecs-deploy.sh] rolloutState=IN_PROGRESS
+[2026-11-05T07:35:01.563Z] [ecs-deploy.sh] rolloutState=IN_PROGRESS
+[2026-11-05T07:35:16.326Z] [ecs-deploy.sh] rolloutState=IN_PROGRESS
+[2026-11-05T07:35:34.287Z] [ecs-deploy.sh] rolloutState=IN_PROGRESS
+[2026-11-05T07:35:49.049Z] [ecs-deploy.sh] rolloutState=IN_PROGRESS
+[2026-11-05T07:36:03.811Z] [ecs-deploy.sh] rolloutState=IN_PROGRESS
+[2026-11-05T07:36:21.772Z] [ecs-deploy.sh] rolloutState=IN_PROGRESS
+[2026-11-05T07:36:36.534Z] [ecs-deploy.sh] rolloutState=COMPLETED
+[2026-11-05T07:36:37.877Z] [ecs-deploy.sh] Service stable:
+[2026-11-05T07:36:37.877Z]   taskDefinition: arn:aws:ecs:eu-west-1:****:task-definition/secure-cicd-app:2
+[2026-11-05T07:36:37.877Z]   running/desired: 2/2
+[Pipeline] sh
+[2026-11-05T07:36:38.159Z] + scripts/ecs-deploy.sh verify
+[2026-11-05T07:36:39.070Z] [ecs-deploy.sh] Checking http://secure-cicd-alb-1392546193.eu-west-1.elb.amazonaws.com
+[2026-11-05T07:36:39.070Z] {"status":"healthy"}
+[2026-11-05T07:36:39.070Z] 
+[2026-11-05T07:36:39.070Z] [ecs-deploy.sh] Live: {"version":"3-91a522b"}
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (GitOps Record)
+[Pipeline] catchError
+[Pipeline] {
+[Pipeline] withCredentials
+[2026-11-05T07:36:39.489Z] Masking supported pattern matches of $GH_TOKEN
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
+[2026-11-05T07:36:39.822Z] + scripts/gitops-record.sh
+[2026-11-05T07:36:42.305Z] [gitops-record.sh] Recorded 3-91a522b on env/dev (44c3128); roll back with: git revert <commit>
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // catchError
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Cleanup Old Revisions)
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] sh
+[2026-11-05T07:36:42.872Z] + scripts/ecs-cleanup.sh
+[2026-11-05T07:36:43.783Z] [ecs-cleanup.sh] In use by the service: arn:aws:ecs:eu-west-1:****:task-definition/secure-cicd-app:2
+[2026-11-05T07:36:44.694Z] [ecs-cleanup.sh] ACTIVE revisions: 2 (keeping newest 5)
+[2026-11-05T07:36:46.556Z] -----------------------------------------------------------
+[2026-11-05T07:36:46.556Z] |                     DescribeImages                      |
+[2026-11-05T07:36:46.556Z] +-----------------------------------+-------+-------------+
+[2026-11-05T07:36:46.556Z] |              pushed               | scan  |     tag     |
+[2026-11-05T07:36:46.556Z] +-----------------------------------+-------+-------------+
+[2026-11-05T07:36:46.556Z] |  2026-11-05T07:34:35.713000+00:00 |  None |  3-91a522b  |
+[2026-11-05T07:36:46.556Z] +-----------------------------------+-------+-------------+
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] sh
+[2026-11-05T07:36:46.941Z] + scripts/summarize-findings.sh
+[2026-11-05T07:36:46.941Z] # Security scan summary
+[2026-11-05T07:36:46.941Z] 
+[2026-11-05T07:36:46.941Z] Build: http://54.216.98.36:8080/job/secure-cicd-ecs/job/main/3/  |  Image tag: 3-91a522b  |  Commit: 91a522bd1802aedbf7d8f3b05dd25646b04e3074
+[2026-11-05T07:36:46.941Z] 
+[2026-11-05T07:36:46.941Z] | Control | Tool | Result |
+[2026-11-05T07:36:46.941Z] | --- | --- | --- |
+[2026-11-05T07:36:46.941Z] | Secret scan | Gitleaks | 0 finding(s) |
+[2026-11-05T07:36:46.941Z] | SAST | SonarQube | Quality Gate: OK |
+[2026-11-05T07:36:46.942Z] | SCA | OWASP Dependency-Check | CRITICAL=0 HIGH=0 |
+[2026-11-05T07:36:46.942Z] | Image scan | Trivy | CRITICAL=0 HIGH=0 |
+[2026-11-05T07:36:46.942Z] | SBOM | Syft (CycloneDX) | 2853 components |
+[Pipeline] archiveArtifacts
+[2026-11-05T07:36:46.964Z] Archiving artifacts
+[2026-11-05T07:36:46.982Z] Recording fingerprints
+[Pipeline] sh
+[2026-11-05T07:36:47.421Z] + docker image rm -f secure-cicd-app:3-91a522b secure-cicd-app-test:3-91a522b
+[2026-11-05T07:36:47.421Z] Untagged: secure-cicd-app:3-91a522b
+[2026-11-05T07:36:47.421Z] Untagged: secure-cicd-app-test:3-91a522b
+[2026-11-05T07:36:47.421Z] Deleted: sha256:98dab1a1be02126b242d01f8dd338260e6fc5b8a16b0ac38b79b5918139366e9
+[2026-11-05T07:36:47.421Z] Deleted: sha256:82c367ede8e8af2c99e3c283f8ffafb64f33343f8f162221b449edea88b45286
+[2026-11-05T07:36:47.421Z] Deleted: sha256:8c961f84e4758d076a2e4404a2f5c4a5dc134ac280d6ddb1845b6ca4e46a9bed
+[2026-11-05T07:36:47.421Z] Deleted: sha256:dcc19a3fe7fa1a43692d462f2172a4382207f79ac99a002b1965a50c7715749b
+[Pipeline] sh
+[2026-11-05T07:36:47.699Z] + rm -rf .sca-deps .scannerwork
+[Pipeline] echo
+[2026-11-05T07:36:47.735Z] Deployed 3-91a522b to secure-cicd-service. Evidence archived on this build.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // timeout
+[Pipeline] }
+[Pipeline] // timestamps
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+
+GitHub has been notified of this commit’s build result
+
+Finished: SUCCESS

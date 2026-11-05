@@ -12,7 +12,7 @@ The README summarises this file; `EVIDENCE-CHECKLIST.md` is the submission check
 ## Environment
 | Item | Value |
 | --- | --- |
-| AWS account / region | 904570587823 (sandbox) / eu-west-1 |
+| AWS account / region | 182399707265 (sandbox, 2nd lease; the first lease, 904570587823, expired and was wiped) / eu-west-1 |
 | Provisioning | Terraform `terraform/environments/dev` (VPC, ECR, ECS Fargate + ALB, CloudWatch, IAM, Jenkins host) |
 | Configuration | Ansible `site.yml` (Docker host prep, SonarQube, Jenkins via Configuration-as-Code) |
 | CI | Jenkins multibranch job `secure-cicd-ecs`, shared library `secure-pipeline-lib` |
@@ -60,10 +60,15 @@ The README summarises this file; `EVIDENCE-CHECKLIST.md` is the submission check
 | Build #3 | **Image scan gate FAILED** (5 HIGH) | `msgpack`, `setuptools`, `urllib3` shipped with pip in the base image | Production stage removes pip/setuptools/wheel |
 | Build #4 | Deploy to ECS failed at RegisterTaskDefinition | Jenkins role lacked `ecs:TagResource` | Scoped permission added in `modules/jenkins_access`; pipeline now fails fast on registration errors |
 | Build #5 | Summary shows SAST "not available" | Gate JSON fetched from `localhost:9000`, not reachable inside the Jenkins container | Fetched via a host-network container |
+| Lease change | Key stopped working ("InvalidClientTokenId"); Jenkins and all resources gone | The sandbox lease expired and the account was wiped; a new account was assigned | New IAM user + key; old Terraform state moved aside; Terraform + Ansible re-run; account ID in the vault updated |
+| New account | Terraform failed on `ssm:GetParameter` / `ec2:DescribeAvailabilityZones`; every service denied for an IAM-user key | Organization service control policy only allowed the portal's own session at first | Temporary credentials from CloudShell for Terraform; later the policy was loosened and IAM-user keys worked |
+| New account | Jenkins instance role denied (`explicit deny in a service control policy`) | Same policy also blocked the instance role | Temporary workaround script `scripts/push-aws-creds.sh`; removed once the policy was relaxed |
+| Build #2 (new account) | Push to ECR failed with `ExpiredToken` | The temporary credentials file had expired | File removed; Jenkins uses its instance role again |
 
 Evidence to capture: S04 Jenkins stage view of build #3 (red SAST/SCA/Trivy, Security Gate stopping, deploy stages skipped); S05 the console lines `QUALITY GATE STATUS: FAILED` and `IMAGE SCAN GATE FAILED`; S06 the build #4 console line with `AccessDeniedException`. All three builds are still in Jenkins history.
 
-### 4. Baseline green run (done: build #5, commit 18c695c)
+### 4. Baseline green run (done)
+- First account: build #5, commit 18c695c. Re-done in the new account: build #3, commit 91a522b (same result, all stages green, `/version` = `3-91a522b`).
 - **Result:** unit tests 10 passed; Gitleaks 0 findings; SonarQube gate PASSED; Dependency-Check and Trivy CRITICAL=0 HIGH=0; Syft SBOM with 2853 components; image `5-18c695c` pushed to ECR by digest; task definition revision 2 registered; rolling update completed with 2/2 tasks; ALB answered `/health` and `/version` = `5-18c695c`; deployment recorded on `env/dev`.
 - **Evidence to capture:** S07 stage view all green; S08 ECR repository (tags, scan results); S09 ECS service Deployments tab (revision 2, 2/2 running); S10 `curl http://<alb>/version` in a terminal. Download build #5 artifacts into `evidence/01-baseline-green/`.
 
