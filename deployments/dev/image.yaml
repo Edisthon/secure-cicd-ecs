@@ -1,6 +1,6 @@
 image:
-  tag: "3-335553f"
-  uri: "182399707265.dkr.ecr.eu-west-1.amazonaws.com/secure-cicd-app:3-335553f@sha256:8dff0a3ce706b013add112745bdd096bae988474f770f3523f314fa009de2b1c"
+  tag: "5-244b0d0"
+  uri: "182399707265.dkr.ecr.eu-west-1.amazonaws.com/secure-cicd-app:5-244b0d0@sha256:5e40c8e4f54290004931bc71aff17c15efa760ed1d506e24da4586a50efb3ffa"
 build:
-  commit: "335553f9fe77539e52f934ef14d55344c9063fba"
-  url: "http://54.216.98.36:8080/job/secure-cicd-ecs/job/demo%252Fvulnerable-dependency/3/"
+  commit: "244b0d034fc68c2e4b5dee62febe15b83dff35da"
+  url: "http://54.216.98.36:8080/job/secure-cicd-ecs/job/main/5/"
