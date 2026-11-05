@@ -29,8 +29,8 @@ The README summarises this file; `EVIDENCE-CHECKLIST.md` is the submission check
 | 5 | Demo: injected vulnerable dependency BLOCKS | done (build #2, 595e652) | S11-S13 |
 | 6 | Demo: fix, gate PASSES, new revision deployed | done (build #3, 335553f) | S14-S16 |
 | 7 | Optional: secret gate (Gitleaks) | done (build #1, 0d4d657) | S17-S18 |
-| 8 | Logs, alarms, dashboard after the deploy | todo | |
-| 9 | GitOps rollback test | todo | |
+| 8 | Logs, alarms, dashboard after the deploy | done | S19-S24 |
+| 9 | GitOps rollback test | done (revision 6) | S25-S28 |
 | 10 | Cleanup of old ECR images / ECS revisions | todo | |
 | 11 | Architecture diagram + final README polish | todo | |
 | 12 | `terraform destroy` | todo | |
@@ -90,5 +90,23 @@ Evidence to capture: S04 Jenkins stage view of build #3 (red SAST/SCA/Trivy, Sec
 - **Evidence:** S17 stage view, S18 console; log in `evidence/04-secret-blocked/`.
 - **Cleanup:** delete the demo branch afterwards (`git push origin --delete demo/leaked-secret`).
 
-### 8-12. To do (fill in as we go)
+### 8. Logs, alarms and dashboard (done)
+- **What:** generated traffic against the ALB (`/checkout` in a loop; the app fails about 5% of calls on purpose) and checked the CloudWatch dashboard `secure-cicd-deployments`, the log group `/ecs/secure-cicd-app`, the 6 alarms and the SNS topic `secure-cicd-alerts`.
+- **Dashboard:** requests peak at about 63, with a visible 5xx blip; CPU and memory move during the loop and the deploy; running tasks stay at 2 (S19).
+- **Logs:** structured JSON from the app with `trace_id` and `span_id`: an INFO `Starting checkout process`, then an ERROR `Checkout failed! Database connection lost.`, and the matching `GET /checkout ... 500` access line (S20).
+- **Alarms:** 6 alarms, all OK at rest (S21): `http-5xx-rate`, `app-error-logs`, `running-tasks-low`, `latency-p95`, `unhealthy-targets` and one more.
+- **Alert path, proven end to end:** `secure-cicd-http-5xx-rate` (metric expression `100 * errors / MAX([errors, requests])`, threshold 5, one 300 s period) went **OK to ALARM at 15:25:09 UTC** (datapoint 50.0), and back **ALARM to OK at 15:32:09 UTC** (datapoint 2.86). Both emails arrived from AWS Notifications (S23, S24). The SNS subscription is Confirmed (S22).
+- **Lesson:** the first loop ran while the SNS subscription was still *pending confirmation*, so that alarm sent nothing. Confirm the subscription email right after `terraform apply`.
+- **Note:** at very low traffic one failed request is a 50% error rate, so the 5xx alarm is noisy on an idle service. A real setup would add a minimum request count.
+- **Evidence:** S19 dashboard, S20 app logs, S21 alarm list, S22 SNS Confirmed, S23 ALARM email, S24 OK email.
+
+### 9. GitOps rollback (done)
+- **What:** prove a release can be undone from Git. Branch `env/dev` holds one commit per deploy (rendered task definition + `image.yaml`); the live record was `5-244b0d0` (commit 09c3492, ECS revision 5, from `main`).
+- **Actions:** `git revert 09c3492` on `env/dev` in a separate worktree (the branch is an orphan holding only deployment state), push; then `scripts/ecs-deploy.sh rollback` with the reverted `deployments/dev/taskdef.json`. The first run stopped because `jq` was missing in WSL (the register step had already run), so after `apt-get install jq` the run was finished with `ecs-deploy.sh update <revision 6 ARN>` and `ecs-deploy.sh wait`.
+- **Result:** the rollback registered task definition **revision 6** from the old record (image pinned by digest), the service moved 5 to 6 as a rolling update, `rolloutState=COMPLETED`, 2/2 tasks running, in about 3 minutes. Expected live version after rollback: `3-335553f` (S28 shows the `/version` output).
+- **Why it works:** the task definition in Git pins the image by digest and ECR tags are immutable, so redeploying the old record gives exactly the old build. The rollback creates a new revision rather than reusing an old one.
+- **Evidence:** S25 `/version` before (`5-244b0d0`), S26 the revert on `env/dev`, S27 the rollback run, S28 `/version` after; ECS outputs in `evidence/05-rollback/`.
+- **Note:** the real fix for a bad release is still a new commit through the pipeline; rollback is the emergency path.
+
+### 10-12. To do (fill in as we go)
 Follow `DEMO-RUNBOOK.md`. For each step add an entry here with the result and the screenshot numbers.

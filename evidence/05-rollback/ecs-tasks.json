@@ -1,0 +1,6 @@
+{
+    "taskArns": [
+        "arn:aws:ecs:eu-west-1:182399707265:task/secure-cicd-cluster/4cbb9cb241ce4689ada5860ecb676419",
+        "arn:aws:ecs:eu-west-1:182399707265:task/secure-cicd-cluster/7b9c1cb04b9c4851b164d972f2e1bfc7"
+    ]
+}

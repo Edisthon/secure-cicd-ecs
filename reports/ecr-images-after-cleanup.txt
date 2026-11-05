@@ -1,0 +1,60 @@
+{
+    "imageDetails": [
+        {
+            "registryId": "182399707265",
+            "repositoryName": "secure-cicd-app",
+            "imageDigest": "sha256:8dff0a3ce706b013add112745bdd096bae988474f770f3523f314fa009de2b1c",
+            "imageTags": [
+                "3-335553f"
+            ],
+            "imageSizeInBytes": 60730247,
+            "imagePushedAt": "2026-11-05T16:47:25.142000+02:00",
+            "imageManifestMediaType": "application/vnd.docker.distribution.manifest.v2+json",
+            "artifactMediaType": "application/vnd.docker.container.image.v1+json",
+            "lastRecordedPullTime": "2026-11-05T16:47:56.781000+02:00",
+            "imageStatus": "ACTIVE"
+        },
+        {
+            "registryId": "182399707265",
+            "repositoryName": "secure-cicd-app",
+            "imageDigest": "sha256:d04bb009993d2af46c2ed107dd59275c719cf4b63d3e71f744cc901552f892b3",
+            "imageTags": [
+                "4-c704cec"
+            ],
+            "imageSizeInBytes": 60730245,
+            "imagePushedAt": "2026-11-05T10:03:36.887000+02:00",
+            "imageManifestMediaType": "application/vnd.docker.distribution.manifest.v2+json",
+            "artifactMediaType": "application/vnd.docker.container.image.v1+json",
+            "lastRecordedPullTime": "2026-11-05T10:04:13.019000+02:00",
+            "imageStatus": "ACTIVE"
+        },
+        {
+            "registryId": "182399707265",
+            "repositoryName": "secure-cicd-app",
+            "imageDigest": "sha256:5e40c8e4f54290004931bc71aff17c15efa760ed1d506e24da4586a50efb3ffa",
+            "imageTags": [
+                "5-244b0d0"
+            ],
+            "imageSizeInBytes": 60730247,
+            "imagePushedAt": "2026-11-05T17:14:23.986000+02:00",
+            "imageManifestMediaType": "application/vnd.docker.distribution.manifest.v2+json",
+            "artifactMediaType": "application/vnd.docker.container.image.v1+json",
+            "lastRecordedPullTime": "2026-11-05T17:14:58.603000+02:00",
+            "imageStatus": "ACTIVE"
+        },
+        {
+            "registryId": "182399707265",
+            "repositoryName": "secure-cicd-app",
+            "imageDigest": "sha256:64b5e1360d43824d3d481f60e5317437997fce9ada68347ad879521df87e311b",
+            "imageTags": [
+                "3-91a522b"
+            ],
+            "imageSizeInBytes": 60730246,
+            "imagePushedAt": "2026-11-05T09:34:35.713000+02:00",
+            "imageManifestMediaType": "application/vnd.docker.distribution.manifest.v2+json",
+            "artifactMediaType": "application/vnd.docker.container.image.v1+json",
+            "lastRecordedPullTime": "2026-11-05T09:35:02.766000+02:00",
+            "imageStatus": "ACTIVE"
+        }
+    ]
+}

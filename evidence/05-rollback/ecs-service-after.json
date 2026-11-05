@@ -1,0 +1,328 @@
+{
+    "services": [
+        {
+            "serviceArn": "arn:aws:ecs:eu-west-1:182399707265:service/secure-cicd-cluster/secure-cicd-service",
+            "serviceName": "secure-cicd-service",
+            "clusterArn": "arn:aws:ecs:eu-west-1:182399707265:cluster/secure-cicd-cluster",
+            "loadBalancers": [
+                {
+                    "targetGroupArn": "arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3",
+                    "containerName": "app",
+                    "containerPort": 8080
+                }
+            ],
+            "serviceRegistries": [],
+            "status": "ACTIVE",
+            "desiredCount": 2,
+            "runningCount": 2,
+            "pendingCount": 0,
+            "launchType": "FARGATE",
+            "platformVersion": "LATEST",
+            "platformFamily": "Linux",
+            "taskDefinition": "arn:aws:ecs:eu-west-1:182399707265:task-definition/secure-cicd-app:6",
+            "deploymentConfiguration": {
+                "deploymentCircuitBreaker": {
+                    "enable": true,
+                    "rollback": true,
+                    "resetOnHealthyTask": true,
+                    "thresholdConfiguration": {
+                        "type": "BOUNDED_PERCENT",
+                        "value": 50
+                    }
+                },
+                "maximumPercent": 200,
+                "minimumHealthyPercent": 100,
+                "strategy": "ROLLING",
+                "bakeTimeInMinutes": 0
+            },
+            "deployments": [
+                {
+                    "id": "ecs-svc/2933688742324857156",
+                    "status": "PRIMARY",
+                    "taskDefinition": "arn:aws:ecs:eu-west-1:182399707265:task-definition/secure-cicd-app:6",
+                    "desiredCount": 2,
+                    "pendingCount": 0,
+                    "runningCount": 2,
+                    "failedTasks": 0,
+                    "createdAt": "2026-11-05T17:42:44.056000+02:00",
+                    "updatedAt": "2026-11-05T17:45:24.995000+02:00",
+                    "launchType": "FARGATE",
+                    "platformVersion": "1.4.0",
+                    "platformFamily": "Linux",
+                    "networkConfiguration": {
+                        "awsvpcConfiguration": {
+                            "subnets": [
+                                "subnet-0ebe9f4082060ae2c",
+                                "subnet-0223e0549ef343206"
+                            ],
+                            "securityGroups": [
+                                "sg-008786e0a629932ee"
+                            ],
+                            "assignPublicIp": "ENABLED"
+                        }
+                    },
+                    "rolloutState": "COMPLETED",
+                    "rolloutStateReason": "ECS deployment ecs-svc/2933688742324857156 completed."
+                }
+            ],
+            "roleArn": "arn:aws:iam::182399707265:role/aws-service-role/ecs.amazonaws.com/AWSServiceRoleForECS",
+            "events": [
+                {
+                    "id": "82786b49-d905-4f95-bb52-0324b24a6a86",
+                    "createdAt": "2026-11-05T17:45:25.004000+02:00",
+                    "message": "(service secure-cicd-service) has reached a steady state."
+                },
+                {
+                    "id": "6f71e0b6-867f-459e-b339-c24892ade721",
+                    "createdAt": "2026-11-05T17:45:25.003000+02:00",
+                    "message": "(service secure-cicd-service) (deployment ecs-svc/2933688742324857156) deployment completed."
+                },
+                {
+                    "id": "a2970917-eabf-4b3f-b4c6-9f8c76b0fd83",
+                    "createdAt": "2026-11-05T17:44:24.131000+02:00",
+                    "message": "(service secure-cicd-service, taskSet ecs-svc/7349092603710687712) has begun draining connections on 2 tasks."
+                },
+                {
+                    "id": "1d927e65-63a3-426a-8924-f88faf56ac29",
+                    "createdAt": "2026-11-05T17:44:24.125000+02:00",
+                    "message": "(service secure-cicd-service) deregistered 2 targets in (target-group arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3)"
+                },
+                {
+                    "id": "cf243db3-ae75-44d7-8e97-fc5414130afe",
+                    "createdAt": "2026-11-05T17:44:13.956000+02:00",
+                    "message": "(service secure-cicd-service) has stopped 2 running tasks: (task c90d3dd7bbde4d8fa514be8563a18dd6) (task a2065f1bb0ea4a4990fac3b36965608a)."
+                },
+                {
+                    "id": "80260984-17ee-45ea-9e65-01fe393c2c76",
+                    "createdAt": "2026-11-05T17:43:23.327000+02:00",
+                    "message": "(service secure-cicd-service) registered 2 targets in (target-group arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3)"
+                },
+                {
+                    "id": "92b58658-f7c5-4d69-bb29-8aa6be774708",
+                    "createdAt": "2026-11-05T17:43:04.411000+02:00",
+                    "message": "(service secure-cicd-service) has started 2 tasks: (task 4cbb9cb241ce4689ada5860ecb676419) (task 7b9c1cb04b9c4851b164d972f2e1bfc7)."
+                },
+                {
+                    "id": "4da8d2d2-829e-47b0-8c19-b56e058c2f5b",
+                    "createdAt": "2026-11-05T17:17:04.287000+02:00",
+                    "message": "(service secure-cicd-service) has reached a steady state."
+                },
+                {
+                    "id": "4528335d-0868-4ac5-87df-19dabc1930ff",
+                    "createdAt": "2026-11-05T17:17:04.286000+02:00",
+                    "message": "(service secure-cicd-service) (deployment ecs-svc/7349092603710687712) deployment completed."
+                },
+                {
+                    "id": "91b210d5-9c78-4b43-be89-b155a75cb732",
+                    "createdAt": "2026-11-05T17:16:04.324000+02:00",
+                    "message": "(service secure-cicd-service, taskSet ecs-svc/3409092778339590123) has begun draining connections on 2 tasks."
+                },
+                {
+                    "id": "d0055782-b3fe-4dfa-8f7c-ebf40e872592",
+                    "createdAt": "2026-11-05T17:16:04.318000+02:00",
+                    "message": "(service secure-cicd-service) deregistered 2 targets in (target-group arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3)"
+                },
+                {
+                    "id": "9e96324d-6475-4055-9d78-fade19bc3b50",
+                    "createdAt": "2026-11-05T17:15:54.253000+02:00",
+                    "message": "(service secure-cicd-service) has stopped 2 running tasks: (task 3a4c908adba74072810298a36d27cf9f) (task d21be580231441c481cd22e118f515ac)."
+                },
+                {
+                    "id": "71fc40ed-ba87-4ae2-bd70-90a80ca399d2",
+                    "createdAt": "2026-11-05T17:15:03.688000+02:00",
+                    "message": "(service secure-cicd-service) registered 1 targets in (target-group arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3)"
+                },
+                {
+                    "id": "75ee3ec3-c53d-4139-b9a8-f70a6a82ae91",
+                    "createdAt": "2026-11-05T17:14:43.506000+02:00",
+                    "message": "(service secure-cicd-service) has started 2 tasks: (task a2065f1bb0ea4a4990fac3b36965608a) (task c90d3dd7bbde4d8fa514be8563a18dd6)."
+                },
+                {
+                    "id": "7a49752e-d3c1-4a55-8108-e71eca2fd14b",
+                    "createdAt": "2026-11-05T16:50:06.143000+02:00",
+                    "message": "(service secure-cicd-service) has reached a steady state."
+                },
+                {
+                    "id": "e02e6360-5bd0-46cb-b690-e3610a187ef3",
+                    "createdAt": "2026-11-05T16:50:06.142000+02:00",
+                    "message": "(service secure-cicd-service) (deployment ecs-svc/3409092778339590123) deployment completed."
+                },
+                {
+                    "id": "162a6d48-c7c5-4204-9169-3ff1772e007d",
+                    "createdAt": "2026-11-05T16:49:05.066000+02:00",
+                    "message": "(service secure-cicd-service, taskSet ecs-svc/2036624035403490949) has begun draining connections on 2 tasks."
+                },
+                {
+                    "id": "16ab4cb4-40ef-4d32-bad4-18b6c33d98e3",
+                    "createdAt": "2026-11-05T16:49:05.061000+02:00",
+                    "message": "(service secure-cicd-service) deregistered 2 targets in (target-group arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3)"
+                },
+                {
+                    "id": "10f8b75a-db87-421c-a892-b3ae30325067",
+                    "createdAt": "2026-11-05T16:48:55.258000+02:00",
+                    "message": "(service secure-cicd-service) has stopped 2 running tasks: (task c4e07e71b0174056848bc0867249f567) (task dc4ee559bdfd44029e9a4f77285bbb56)."
+                },
+                {
+                    "id": "7a657224-93cd-45dd-a755-0320aadc5717",
+                    "createdAt": "2026-11-05T16:48:03.948000+02:00",
+                    "message": "(service secure-cicd-service) registered 1 targets in (target-group arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3)"
+                },
+                {
+                    "id": "626203a8-642c-4c0b-82aa-7ee1f26d5227",
+                    "createdAt": "2026-11-05T16:47:45.548000+02:00",
+                    "message": "(service secure-cicd-service) has started 2 tasks: (task 3a4c908adba74072810298a36d27cf9f) (task d21be580231441c481cd22e118f515ac)."
+                },
+                {
+                    "id": "38808274-9ff3-4898-bab2-d785087e6ada",
+                    "createdAt": "2026-11-05T16:06:29.164000+02:00",
+                    "message": "(service secure-cicd-service) has reached a steady state."
+                },
+                {
+                    "id": "7b9acc08-4c4b-4ec9-bf89-b15a9ac2529b",
+                    "createdAt": "2026-11-05T10:06:12.905000+02:00",
+                    "message": "(service secure-cicd-service) has reached a steady state."
+                },
+                {
+                    "id": "07d330d8-506c-4b71-afa2-958b087cb3c3",
+                    "createdAt": "2026-11-05T10:06:12.904000+02:00",
+                    "message": "(service secure-cicd-service) (deployment ecs-svc/2036624035403490949) deployment completed."
+                },
+                {
+                    "id": "35a7233a-630a-4730-9c73-bd25b3dd48ae",
+                    "createdAt": "2026-11-05T10:05:20.860000+02:00",
+                    "message": "(service secure-cicd-service, taskSet ecs-svc/3742133809947207518) has begun draining connections on 2 tasks."
+                },
+                {
+                    "id": "338c20d0-01ef-452b-a702-0d2f18a83f3c",
+                    "createdAt": "2026-11-05T10:05:20.853000+02:00",
+                    "message": "(service secure-cicd-service) deregistered 2 targets in (target-group arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3)"
+                },
+                {
+                    "id": "f965baf2-8552-49e3-aa44-260cb9a18c37",
+                    "createdAt": "2026-11-05T10:05:11.116000+02:00",
+                    "message": "(service secure-cicd-service) has stopped 2 running tasks: (task d1d0997d64764b8d81aadd2d0a3f0f3c) (task ff51edb34ca5417cacd30d5a632103c9)."
+                },
+                {
+                    "id": "1874c88d-a8ae-4c2e-b602-66987e69e512",
+                    "createdAt": "2026-11-05T10:04:21.163000+02:00",
+                    "message": "(service secure-cicd-service) registered 1 targets in (target-group arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3)"
+                },
+                {
+                    "id": "7744442c-2c46-448c-8def-d16f1267ab13",
+                    "createdAt": "2026-11-05T10:04:01.798000+02:00",
+                    "message": "(service secure-cicd-service) has started 2 tasks: (task c4e07e71b0174056848bc0867249f567) (task dc4ee559bdfd44029e9a4f77285bbb56)."
+                },
+                {
+                    "id": "861453bf-afe7-44c3-95da-3384bbc801f5",
+                    "createdAt": "2026-11-05T09:36:20.557000+02:00",
+                    "message": "(service secure-cicd-service) has reached a steady state."
+                },
+                {
+                    "id": "7f8e5bf7-d180-4a80-bebe-26c744779456",
+                    "createdAt": "2026-11-05T09:36:20.556000+02:00",
+                    "message": "(service secure-cicd-service) (deployment ecs-svc/3742133809947207518) deployment completed."
+                },
+                {
+                    "id": "f7cbaf9a-d7a0-4f1c-ad1a-c6e8cac9acf3",
+                    "createdAt": "2026-11-05T09:35:19.857000+02:00",
+                    "message": "(service secure-cicd-service, taskSet ecs-svc/1817372815632328250) has begun draining connections on 1 tasks."
+                },
+                {
+                    "id": "1b62fff2-bedf-459a-8ff8-73373c9d1d50",
+                    "createdAt": "2026-11-05T09:35:19.851000+02:00",
+                    "message": "(service secure-cicd-service) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3)"
+                },
+                {
+                    "id": "08eba205-ed8b-4fa0-9902-d404959061e4",
+                    "createdAt": "2026-11-05T09:35:09.860000+02:00",
+                    "message": "(service secure-cicd-service) registered 1 targets in (target-group arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3)"
+                },
+                {
+                    "id": "138e7835-dbca-4c4e-9e3c-6964aec26af2",
+                    "createdAt": "2026-11-05T09:35:09.073000+02:00",
+                    "message": "(service secure-cicd-service, taskSet ecs-svc/1817372815632328250) has begun draining connections on 1 tasks."
+                },
+                {
+                    "id": "4a355503-936d-416b-96a0-c7c0647f74bb",
+                    "createdAt": "2026-11-05T09:35:09.067000+02:00",
+                    "message": "(service secure-cicd-service) deregistered 1 targets in (target-group arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3)"
+                },
+                {
+                    "id": "d6735b08-f423-4b2d-96a9-e971a48903b4",
+                    "createdAt": "2026-11-05T09:34:59.840000+02:00",
+                    "message": "(service secure-cicd-service) registered 1 targets in (target-group arn:aws:elasticloadbalancing:eu-west-1:182399707265:targetgroup/secure-cicd-tg/417c63d933da1cd3)"
+                },
+                {
+                    "id": "14d3afa0-5e9b-4115-a251-0416bdf96bd0",
+                    "createdAt": "2026-11-05T09:34:50.134000+02:00",
+                    "message": "(service secure-cicd-service) has started 2 tasks: (task d1d0997d64764b8d81aadd2d0a3f0f3c) (task ff51edb34ca5417cacd30d5a632103c9)."
+                },
+                {
+                    "id": "baeabb0d-8303-434e-9638-cca92b2dc6ab",
+                    "createdAt": "2026-11-05T09:34:43.626000+02:00",
+                    "message": "(service secure-cicd-service) has started 2 tasks: (task b515c93bbf17404bb3e9d28e1a288053) (task fe1e859eefbf4666b4cc4e3d7e0df322)."
+                },
+                {
+                    "id": "7671086a-8a5f-41ac-9506-00111c5d101e",
+                    "createdAt": "2026-11-05T09:04:06.330000+02:00",
+                    "message": "(service secure-cicd-service) has reached a steady state."
+                },
+                {
+                    "id": "e73989dc-af10-41e0-8a9c-fbf7e833aadb",
+                    "createdAt": "2026-11-05T03:03:39.029000+02:00",
+                    "message": "(service secure-cicd-service) has reached a steady state."
+                },
+                {
+                    "id": "9390de1a-0c4c-494b-9bc4-74b2651e1036",
+                    "createdAt": "2026-11-04T21:03:35.368000+02:00",
+                    "message": "(service secure-cicd-service) has reached a steady state."
+                },
+                {
+                    "id": "78bb011f-5048-43e7-8b80-8f5a41a0e475",
+                    "createdAt": "2026-11-04T15:03:19.759000+02:00",
+                    "message": "(service secure-cicd-service) has reached a steady state."
+                },
+                {
+                    "id": "7a93372c-c0db-4c4c-8b6b-e6ed5470b49d",
+                    "createdAt": "2026-11-04T15:03:19.758000+02:00",
+                    "message": "(service secure-cicd-service) (deployment ecs-svc/1817372815632328250) deployment completed."
+                }
+            ],
+            "createdAt": "2026-11-04T15:03:09.885000+02:00",
+            "currentServiceRevisions": [
+                {
+                    "arn": "arn:aws:ecs:eu-west-1:182399707265:service-revision/secure-cicd-cluster/secure-cicd-service/2933688742324857156",
+                    "requestedTaskCount": 2,
+                    "runningTaskCount": 2,
+                    "pendingTaskCount": 0
+                }
+            ],
+            "placementConstraints": [],
+            "placementStrategy": [],
+            "networkConfiguration": {
+                "awsvpcConfiguration": {
+                    "subnets": [
+                        "subnet-0ebe9f4082060ae2c",
+                        "subnet-0223e0549ef343206"
+                    ],
+                    "securityGroups": [
+                        "sg-008786e0a629932ee"
+                    ],
+                    "assignPublicIp": "ENABLED"
+                }
+            },
+            "healthCheckGracePeriodSeconds": 30,
+            "schedulingStrategy": "REPLICA",
+            "deploymentController": {
+                "type": "ECS"
+            },
+            "createdBy": "arn:aws:iam::182399707265:role/DCEPrincipal-dce",
+            "enableECSManagedTags": false,
+            "propagateTags": "NONE",
+            "enableExecuteCommand": false,
+            "availabilityZoneRebalancing": "ENABLED",
+            "resourceManagementType": "CUSTOMER"
+        }
+    ],
+    "failures": []
+}
