@@ -15,7 +15,7 @@
   "containerDefinitions": [
     {
       "name": "app",
-      "image": "182399707265.dkr.ecr.eu-west-1.amazonaws.com/secure-cicd-app:4-c704cec@sha256:d04bb009993d2af46c2ed107dd59275c719cf4b63d3e71f744cc901552f892b3",
+      "image": "182399707265.dkr.ecr.eu-west-1.amazonaws.com/secure-cicd-app:3-335553f@sha256:8dff0a3ce706b013add112745bdd096bae988474f770f3523f314fa009de2b1c",
       "essential": true,
       "portMappings": [
         {
@@ -36,7 +36,7 @@
       "environment": [
         {
           "name": "APP_VERSION",
-          "value": "4-c704cec"
+          "value": "3-335553f"
         },
         {
           "name": "PORT",
@@ -83,7 +83,7 @@
     },
     {
       "key": "build",
-      "value": "4-c704cec"
+      "value": "3-335553f"
     },
     {
       "key": "managed-by",
